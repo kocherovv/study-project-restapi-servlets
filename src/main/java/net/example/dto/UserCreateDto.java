@@ -14,6 +14,8 @@ public class UserCreateDto {
 
     private final String email;
 
+    private final byte[] password;
+
     @Builder.Default
     private final List<Long> events_id = new ArrayList<>();
 }

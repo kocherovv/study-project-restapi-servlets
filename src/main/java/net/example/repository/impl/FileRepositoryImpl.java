@@ -1,10 +1,12 @@
 package net.example.repository.impl;
 
 import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 import net.example.domain.entity.File;
 import net.example.repository.RepositoryBase;
 import net.example.repository.FileRepository;
 
+@Transactional
 public class FileRepositoryImpl extends RepositoryBase<File, Long> implements FileRepository {
 
     private final EntityManager entityManager;

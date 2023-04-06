@@ -9,6 +9,7 @@ public class UserCreateMapper implements Mapper<User, UserCreateDto> {
         return User.builder()
             .name(source.getName())
             .email(source.getEmail())
+            .password(source.getPassword())
             .build();
     }
 }

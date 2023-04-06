@@ -24,6 +24,8 @@ public class User {
 
     private String email;
 
+    private byte[] password;
+
     @OneToMany(mappedBy = "user")
     @Builder.Default
     private List<Event> events = new ArrayList<>();

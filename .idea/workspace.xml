@@ -1,20 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="study-project-restapi:war exploded" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="55c5d152-5564-4e76-9ceb-b6e734f69822" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
+    <list default="true" id="55c5d152-5564-4e76-9ceb-b6e734f69822" name="Changes" comment="first">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/study_project_restapi_war_exploded.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/META-INF/orm.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/META-INF/persistence.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/example/controller/AuthenticationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/example/controller/HomeServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/example/service/CrudService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/example/util/PasswordHasher.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/META-INF/context.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/AppRunner.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/controller/EventController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/example/controller/EventController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/controller/FileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/example/controller/FileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/example/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/domain/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/example/domain/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/dto/UserCreateDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/example/dto/UserCreateDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/dto/mapper/UserCreateMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/example/dto/mapper/UserCreateMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/repository/impl/EventRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/example/repository/impl/EventRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/repository/impl/FileRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/example/repository/impl/FileRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/repository/impl/UserRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/example/repository/impl/UserRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/service/EventService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/example/service/EventService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/service/FileManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/service/FileService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/example/service/FileService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/example/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/util/AppContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/example/util/AppContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +48,9 @@
         <option value="Tag Library Descriptor" />
         <option value="Enum" />
         <option value="Interface" />
+        <option value="HTML File" />
+        <option value="CSS File" />
+        <option value="Jsp File" />
         <option value="Class" />
       </list>
     </option>
@@ -34,8 +58,27 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="4d1224e3-76a0-49b1-b2ac-ba98af85593e" />
+        <option name="url" value="https://github.com/kocherovv/study-project-restapi.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
   <component name="JpbToolWindowState">
     <option name="isToolWindowVisible" value="false" />
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="false" />
+    <option name="FILTER_DEBUG" value="false" />
+    <option name="CUSTOM_FILTER" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -57,54 +100,54 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "jdk.selected.JAVA_MODULE": "openjdk-19",
-    "last_opened_file_path": "/Users/kocherov/IdeaProjects/Study-Project-RestAPI/src/main/java/org/example",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Facets",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-19&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/kocherov/IdeaProjects/Study-Project-RestAPI/web&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.19679634&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
     ],
-    "RunConfigurationTargetLRU": [
-      "6d92b55a-471d-4d4c-b61a-d4b6d501517f",
-      "6d92b55a-471d-4d4c-b61a-d4b6d501517f/database/\"postgres\"/schema/\"study_schema_restapi\""
+    &quot;RunConfigurationTargetLRU&quot;: [
+      &quot;6d92b55a-471d-4d4c-b61a-d4b6d501517f&quot;,
+      &quot;6d92b55a-471d-4d4c-b61a-d4b6d501517f/database/\&quot;postgres\&quot;/schema/\&quot;study_schema_restapi\&quot;&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/web" />
+      <recent name="$PROJECT_DIR$/web/WEB-INF" />
       <recent name="$PROJECT_DIR$/src/main/java/org/example" />
       <recent name="$PROJECT_DIR$/src/main/resources" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/web/WEB-INF/JSP" />
+      <recent name="$PROJECT_DIR$/web/WEB-INF/CSS" />
+      <recent name="$PROJECT_DIR$/web/html" />
+      <recent name="$PROJECT_DIR$/web" />
+    </key>
   </component>
-  <component name="RunManager" selected="Application.net.example.AppRunner">
-    <configuration name="AppRunner" type="Application" factoryName="Application" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.example.AppRunner" />
-      <module name="study-project-restapi" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.example.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunDashboard">
+    <option name="openRunningConfigInTab" value="true" />
+  </component>
+  <component name="RunManager" selected="Tomcat Server.Tomcat">
     <configuration name="net.example.AppRunner" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="net.example.AppRunner" />
       <module name="study-project-restapi" />
@@ -118,22 +161,107 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="V1__Base_version.sql (1)" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
-      <script-file value="$PROJECT_DIR$/src/main/resources/db.migration/V1__Base_version.sql" />
-      <script-mode>FILE</script-mode>
-      <data-source id="6d92b55a-471d-4d4c-b61a-d4b6d501517f" namespace="database/&quot;postgres&quot;/schema/&quot;study_schema_restapi&quot;" />
-      <method v="2" />
-    </configuration>
     <configuration name="V1__Base_version.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
       <script-file value="$PROJECT_DIR$/src/main/resources/db.migration/V1__Base_version.sql" />
       <script-mode>FILE</script-mode>
       <data-source id="6d92b55a-471d-4d4c-b61a-d4b6d501517f" namespace="database/&quot;postgres&quot;/schema/&quot;study_schema_restapi&quot;" />
       <method v="2" />
     </configuration>
+    <configuration name="Tomcat" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.7" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="openjdk-19">
+      <option name="OPEN_IN_BROWSER" value="false" />
+      <option name="UPDATING_POLICY" value="restart-server" />
+      <deployment>
+        <artifact name="study-project-restapi:war exploded">
+          <settings>
+            <option name="CONTEXT_PATH" value="/study-project-restapi" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="87d8e279-2825-4718-840d-4220b3902987" />
+      </server-settings>
+      <log_file alias="Tomcat Manager Log" path="%IDEA_RUN:CATALINA_BASE%/logs/manager.*" />
+      <log_file alias="Tomcat Host Manager Log" path="%IDEA_RUN:CATALINA_BASE%/logs/host-manager.*" />
+      <log_file alias="Tomcat Localhost Access Log" path="%IDEA_RUN:CATALINA_BASE%/logs/localhost_access_log.*" />
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="61150" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Profile">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="study-project-restapi:war exploded" />
+        </option>
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.net.example.AppRunner" />
+      <item itemvalue="Database Script.V1__Base_version.sql" />
+      <item itemvalue="Tomcat Server.Tomcat" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.net.example.AppRunner" />
-        <item itemvalue="Database Script.V1__Base_version.sql (1)" />
         <item itemvalue="Database Script.V1__Base_version.sql" />
       </list>
     </recent_temporary>
@@ -148,8 +276,18 @@
       <updated>1678982964357</updated>
       <workItem from="1678982965544" duration="8946000" />
       <workItem from="1679044596469" duration="41056000" />
-      <workItem from="1679405309815" duration="1755000" />
+      <workItem from="1679405309815" duration="45430000" />
+      <workItem from="1680167256778" duration="12272000" />
+      <workItem from="1680774657956" duration="3084000" />
     </task>
+    <task id="LOCAL-00001" summary="first">
+      <created>1679407185980</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1679407185980</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -166,19 +304,8 @@
       </map>
     </option>
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>jar://$USER_HOME$/Library/Java/JavaVirtualMachines/openjdk-19.0.1/Contents/Home/lib/src.zip!/java.base/jdk/internal/loader/ClassLoaders.java</url>
-          <line>173</line>
-          <properties class="jdk.internal.loader.ClassLoaders.AppClassLoader" method="loadClass">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="first" />
+    <option name="LAST_COMMIT_MESSAGE" value="first" />
   </component>
 </project>

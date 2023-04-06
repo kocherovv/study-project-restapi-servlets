@@ -1,5 +1,6 @@
 package net.example.service;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import net.example.dto.mapper.EventReadMapper;
 import net.example.model.AppStatusCode;
@@ -12,8 +13,9 @@ import net.example.exception.NotFoundException;
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 @RequiredArgsConstructor
-public class EventService {
+public class EventService implements CrudService <EventCreateDto, EventReadDto, Long>{
 
     private final EventRepositoryImpl eventRepositoryImpl;
 

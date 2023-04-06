@@ -1,5 +1,6 @@
 package net.example.service;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import net.example.dto.EventReadDto;
 import net.example.dto.FileCreateDto;
@@ -15,8 +16,9 @@ import net.example.repository.impl.FileRepositoryImpl;
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 @RequiredArgsConstructor
-public class FileService {
+public class FileService implements CrudService<FileCreateDto, FileReadDto, Long>{
     private final FileRepositoryImpl fileRepositoryImpl;
     private final EventRepositoryImpl eventRepositoryImpl;
 
