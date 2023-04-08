@@ -2,8 +2,10 @@ package net.example.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
+import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.experimental.UtilityClass;
 import net.example.dto.mapper.*;
 import net.example.repository.impl.EventRepositoryImpl;
@@ -14,9 +16,12 @@ import net.example.service.EventService;
 import net.example.service.FileService;
 import net.example.service.UserService;
 import org.hibernate.Session;
+import org.hibernate.context.spi.CurrentSessionContext;
 
 @Getter
 public class AppContainer {
+
+    private static final AppContainer instance = new AppContainer();
 
     private final UserRepositoryImpl userRepository;
     private final EventRepositoryImpl eventRepository;
@@ -35,7 +40,9 @@ public class AppContainer {
     private final FileService fileService;
     private final EventService eventService;
 
-    public AppContainer(Session session) {
+    private AppContainer() {
+
+        var session = HibernateUtil.getProxySession();
 
         userRepository = new UserRepositoryImpl(session);
         fileRepository = new FileRepositoryImpl(session);
@@ -54,6 +61,10 @@ public class AppContainer {
             userReadMapper, eventReadMapper);
         fileService = new FileService(fileRepository, eventRepository, fileCreateMapper,
             fileReadMapper, eventReadMapper);
-        eventService = new EventService(eventRepository, eventCreateMapper, eventReadMapper);
+        eventService = new EventService(eventRepository, userRepository, fileRepository, eventCreateMapper, eventReadMapper);
+    }
+
+    public static AppContainer getInstance() {
+        return instance;
     }
 }

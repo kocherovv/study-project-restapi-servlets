@@ -2,9 +2,8 @@ package net.example.service;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import net.example.dto.EventReadDto;
-import net.example.dto.FileCreateDto;
-import net.example.dto.FileReadDto;
+import net.example.domain.enums.EventType;
+import net.example.dto.*;
 import net.example.dto.mapper.EventReadMapper;
 import net.example.dto.mapper.FileCreateMapper;
 import net.example.dto.mapper.FileReadMapper;
@@ -12,6 +11,7 @@ import net.example.exception.NotFoundException;
 import net.example.model.AppStatusCode;
 import net.example.repository.impl.EventRepositoryImpl;
 import net.example.repository.impl.FileRepositoryImpl;
+import net.example.util.AppContainer;
 
 import java.util.List;
 import java.util.Optional;
@@ -33,6 +33,11 @@ public class FileService implements CrudService<FileCreateDto, FileReadDto, Long
     }
 
     public Optional<FileReadDto> findById(Long id) {
+        return fileRepositoryImpl.findById(id)
+            .map(fileReadMapper::mapFrom);
+    }
+
+    public Optional<FileReadDto> findById(Long id, EventType eventType) {
         return fileRepositoryImpl.findById(id)
             .map(fileReadMapper::mapFrom);
     }
@@ -63,5 +68,11 @@ public class FileService implements CrudService<FileCreateDto, FileReadDto, Long
             () -> {
                 throw new NotFoundException(AppStatusCode.NOT_FOUND_EXCEPTION);
             });
+    }
+
+    public List<FileReadDto> findAllByUserId(Long id) {
+        return fileRepositoryImpl.findAllByUserId(id).stream()
+            .map(fileReadMapper::mapFrom)
+            .toList();
     }
 }

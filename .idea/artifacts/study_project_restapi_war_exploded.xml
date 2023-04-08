@@ -29,12 +29,12 @@
           <element id="library" level="project" name="Maven: org.antlr:antlr4-runtime:4.10.1" />
           <element id="library" level="project" name="Maven: org.flywaydb:flyway-core:9.16.0" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.dataformat:jackson-dataformat-toml:2.14.0" />
-          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.14.0" />
-          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.14.0" />
-          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.14.0" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.14.2" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.14.2" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.14.2" />
+          <element id="library" level="project" name="Maven: jakarta.el:jakarta.el-api:5.0.0" />
+          <element id="library" level="project" name="Maven: jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.0" />
+          <element id="library" level="project" name="Maven: org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="study-project-restapi/web/Web" />

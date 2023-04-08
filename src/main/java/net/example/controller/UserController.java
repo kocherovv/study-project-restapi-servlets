@@ -15,14 +15,10 @@ import java.io.IOException;
 @WebServlet("/users")
 public class UserController extends HttpServlet {
 
-    private AppContainer appContainer;
-
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         var session = HibernateUtil.getProxySession();
         session.beginTransaction();
-
-        appContainer = new AppContainer(session);
 
         response.setContentType("text/json");
 
@@ -33,8 +29,8 @@ public class UserController extends HttpServlet {
 
             response.setStatus(400);
         } else {
-            var user = appContainer.getJsonMapper().writeValueAsString(
-                appContainer.getUserService().findById(Long.valueOf(userId))
+            var user = AppContainer.getInstance().getJsonMapper().writeValueAsString(
+                AppContainer.getInstance().getUserService().findById(Long.valueOf(userId))
                     .orElse(null));
 
             session.getTransaction().commit();
@@ -50,8 +46,6 @@ public class UserController extends HttpServlet {
 
         session.beginTransaction();
 
-        appContainer = new AppContainer(session);
-
         resp.setContentType("text/json");
 
         var userName = req.getParameter("userName");
@@ -66,7 +60,7 @@ public class UserController extends HttpServlet {
                 .email(email)
                 .build();
 
-            var createdUser = appContainer.getJsonMapper().writeValueAsString(appContainer.getUserService().create(userCreateDto));
+            var createdUser = AppContainer.getInstance().getJsonMapper().writeValueAsString(AppContainer.getInstance().getUserService().create(userCreateDto));
 
             session.getTransaction().commit();
 
@@ -80,8 +74,6 @@ public class UserController extends HttpServlet {
         var session = HibernateUtil.getProxySession();
         session.beginTransaction();
 
-        appContainer = new AppContainer(session);
-
         resp.setContentType("text/json");
 
         var userId = req.getParameter("user_id");
@@ -93,8 +85,8 @@ public class UserController extends HttpServlet {
 
             resp.setStatus(400);
         } else {
-            var user = appContainer.getJsonMapper().writeValueAsString(
-                appContainer.getUserService()
+            var user = AppContainer.getInstance().getJsonMapper().writeValueAsString(
+                AppContainer.getInstance().getUserService()
                     .update(UserReadDto.builder()
                         .id(Long.valueOf(userId))
                         .name(userName)
@@ -113,8 +105,6 @@ public class UserController extends HttpServlet {
         var session = HibernateUtil.getProxySession();
         session.beginTransaction();
 
-        appContainer = new AppContainer(session);
-
         resp.setContentType("text/json");
 
         var userId = req.getParameter("user_id");
@@ -124,7 +114,7 @@ public class UserController extends HttpServlet {
 
             resp.setStatus(400);
         } else {
-            appContainer.getUserService().deleteById(Long.valueOf(userId));
+            AppContainer.getInstance().getUserService().deleteById(Long.valueOf(userId));
 
             session.getTransaction().commit();
 

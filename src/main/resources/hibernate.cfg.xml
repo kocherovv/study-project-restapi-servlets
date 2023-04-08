@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">jdbc:postgresql://localhost:32768/postgres</property>
+        <property name="connection.url">jdbc:postgresql://localhost:32772/postgres</property>
         <property name="hibernate.default_schema">study_schema_restapi</property>
         <property name="connection.username">postgres</property>
         <property name="connection.password">postgrespw</property>
@@ -13,8 +13,9 @@
         <property name="hibernate.current_session_context_class">thread</property>
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
+        <property name="hibernate.connection.pool_size">100</property>
 
-        <property name="hibernate.hbm2ddl.auto">update</property>
+        <!--<property name="hibernate.hbm2ddl.auto">update</property>-->
 
         <!-- <mapping-->
         <mapping class="net.example.domain.entity.User"/>

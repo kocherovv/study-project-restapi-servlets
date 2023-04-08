@@ -6,7 +6,6 @@ import net.example.repository.RepositoryBase;
 import net.example.domain.entity.Event;
 import net.example.repository.EventRepository;
 
-@Transactional
 public class EventRepositoryImpl extends RepositoryBase<Event, Long> implements EventRepository {
 
     private final EntityManager entityManager;

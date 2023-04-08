@@ -23,9 +23,9 @@ public class File extends AuditableEntity {
 
     private String extension;
 
-    private Byte[] content;
+    private byte[] content;
 
-    @OneToMany(mappedBy = "file")
+    @OneToMany(mappedBy = "file", fetch = FetchType.EAGER)
     @Builder.Default
     private List<Event> events = new ArrayList<>();
 }

@@ -10,7 +10,6 @@ public class EventCreateMapper implements Mapper<Event, EventCreateDto> {
             .eventType(dto.getEventType())
             .user(dto.getUser())
             .file(dto.getFile())
-            .createdBy(dto.getCreatedBy())
             .build();
     }
 }

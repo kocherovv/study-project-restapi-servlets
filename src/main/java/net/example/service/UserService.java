@@ -2,6 +2,7 @@ package net.example.service;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import net.example.domain.entity.User;
 import net.example.dto.EventReadDto;
 import net.example.dto.UserCreateDto;
 import net.example.dto.UserReadDto;
@@ -35,7 +36,6 @@ public class UserService implements CrudService<UserCreateDto, UserReadDto, Long
             .toList();
     }
 
-    @Transactional
     public Optional<UserReadDto> findById(Long id) {
         return userRepositoryImpl.findById(id)
             .map(userReadMapper::mapFrom);
@@ -68,10 +68,8 @@ public class UserService implements CrudService<UserCreateDto, UserReadDto, Long
             });
     }
 
-    public boolean userAuthentication(String username, byte[] password) {
-        return userRepositoryImpl.findByUserName(username)
-            .map(value ->
-                Arrays.equals(value.getPassword(), PasswordHasher.hashPassword(password)))
-            .orElse(false);
+    public Optional<UserReadDto> findByUserNameAndPassword(String username, byte[] password) {
+        return userRepositoryImpl.findByUserNameAndPassword(username, password)
+            .map(userReadMapper::mapFrom);
     }
 }

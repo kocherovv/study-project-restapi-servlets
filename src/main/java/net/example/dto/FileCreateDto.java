@@ -15,7 +15,7 @@ public class FileCreateDto {
 
     private final String extension;
 
-    private final Byte[] content;
+    private final byte[] content;
 
     private final Instant createdAt;
 

@@ -26,7 +26,7 @@ public class User {
 
     private byte[] password;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     @Builder.Default
     private List<Event> events = new ArrayList<>();
 }

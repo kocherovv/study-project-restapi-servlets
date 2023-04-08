@@ -16,8 +16,12 @@ public abstract class RepositoryBase <E, ID extends Serializable> implements Cru
 
     @Override
     public List<E> findAll() {
+        entityManager.getTransaction().begin();
+
         var criteriaQuery = entityManager.getCriteriaBuilder().createQuery(clazz);
         criteriaQuery.from(clazz);
+
+        entityManager.getTransaction().commit();
 
         return entityManager.createQuery(criteriaQuery)
             .getResultList();
@@ -25,31 +29,54 @@ public abstract class RepositoryBase <E, ID extends Serializable> implements Cru
 
     @Override
     public Optional<E> findById(ID id) {
-        return Optional.ofNullable(entityManager.find(clazz, id));
+        entityManager.getTransaction().begin();
+
+        var entity = Optional.ofNullable(entityManager.find(clazz, id));
+
+        entityManager.getTransaction().commit();
+
+        return entity;
     }
 
     @Override
     public Optional<E> findById(ID id, Map<String, Object> properties) {
-        return Optional.ofNullable(entityManager.find(clazz, id, properties));
+        entityManager.getTransaction().begin();
+
+        var entity = Optional.ofNullable(entityManager.find(clazz, id, properties));
+
+        entityManager.getTransaction().commit();
+
+        return entity;
     }
 
     @Override
     public E create(E entity) {
+        entityManager.getTransaction().begin();
+
         entityManager.persist(entity);
+
+        entityManager.getTransaction().commit();
 
         return entity;
     }
 
     @Override
     public E update(E entity) {
+        entityManager.getTransaction().begin();
+
         entityManager.merge(entity);
+
+        entityManager.getTransaction().commit();
 
         return entity;
     }
 
     @Override
     public void delete(E entity) {
+        entityManager.getTransaction().begin();
+
         entityManager.remove(entity);
-        entityManager.flush();
+
+        entityManager.getTransaction().commit();
     }
 }

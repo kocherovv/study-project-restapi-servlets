@@ -23,7 +23,7 @@ public class FileReadDto {
 
     private final String extension;
 
-    private final Byte[] content;
+    private final byte[] content;
 
     @Builder.Default
     private final List<EventReadDto> events = new ArrayList<>();

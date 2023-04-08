@@ -1,9 +1,9 @@
 package net.example.Listener;
 
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import net.example.domain.entity.AuditableEntity;
 
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import java.time.Instant;
 
 public class AuditableListener <T extends AuditableEntity> {

@@ -12,7 +12,6 @@ public class EventReadMapper implements Mapper<EventReadDto, Event> {
             .user(source.getUser())
             .file(source.getFile())
             .createdAt(source.getCreatedAt())
-            .createdBy(source.getCreatedBy())
             .updatedAt(source.getUpdatedAt())
             .build();
     }

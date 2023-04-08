@@ -3,6 +3,7 @@ package net.example.domain.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import net.example.Listener.AuditableListener;
 
 import java.time.Instant;
 
@@ -19,5 +20,4 @@ public abstract class AuditableEntity {
     private Long id;
     private Instant createdAt;
     private Instant updatedAt;
-    private String createdBy;
 }

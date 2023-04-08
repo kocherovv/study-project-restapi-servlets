@@ -21,7 +21,6 @@ public class FileCreateMapper implements Mapper<File, FileCreateDto>{
                     .orElseThrow(NotFoundException::new))
                 .toList())
             .extension(source.getExtension())
-            .createdBy(source.getCreatedBy())
             .createdAt(source.getCreatedAt())
             .updatedAt(source.getUpdatedAt())
             .build();

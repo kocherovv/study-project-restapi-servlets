@@ -10,32 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="55c5d152-5564-4e76-9ceb-b6e734f69822" name="Changes" comment="first">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/study_project_restapi_war_exploded.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/META-INF/orm.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/META-INF/persistence.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/example/controller/AuthenticationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/example/controller/HomeServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/example/service/CrudService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/example/util/PasswordHasher.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/META-INF/context.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/AppRunner.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/controller/EventController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/example/controller/EventController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/controller/FileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/example/controller/FileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/example/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/domain/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/example/domain/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/dto/UserCreateDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/example/dto/UserCreateDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/dto/mapper/UserCreateMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/example/dto/mapper/UserCreateMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/repository/impl/EventRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/example/repository/impl/EventRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/repository/impl/FileRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/example/repository/impl/FileRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/repository/impl/UserRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/example/repository/impl/UserRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/service/EventService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/example/service/EventService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/service/FileManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/service/FileService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/example/service/FileService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/example/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/util/AppContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/example/util/AppContainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,8 +26,8 @@
         <option value="Interface" />
         <option value="HTML File" />
         <option value="CSS File" />
-        <option value="Jsp File" />
         <option value="Class" />
+        <option value="Jsp File" />
       </list>
     </option>
   </component>
@@ -278,7 +254,7 @@
       <workItem from="1679044596469" duration="41056000" />
       <workItem from="1679405309815" duration="45430000" />
       <workItem from="1680167256778" duration="12272000" />
-      <workItem from="1680774657956" duration="3084000" />
+      <workItem from="1680774657956" duration="49556000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <created>1679407185980</created>
@@ -287,7 +263,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679407185980</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="first">
+      <created>1680778009336</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1680778009337</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -307,5 +290,12 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first" />
     <option name="LAST_COMMIT_MESSAGE" value="first" />
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="org.apache.catalina.connector.Request" memberName="session" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>

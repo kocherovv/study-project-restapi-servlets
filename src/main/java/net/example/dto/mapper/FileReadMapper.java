@@ -19,7 +19,6 @@ public class FileReadMapper implements Mapper<FileReadDto, File> {
                 .map(eventReadMapper::mapFrom)
                 .toList())
             .extension(source.getExtension())
-            .createdBy(source.getCreatedBy())
             .createdAt(source.getCreatedAt())
             .updatedAt(source.getUpdatedAt())
             .build();
