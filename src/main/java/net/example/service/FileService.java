@@ -3,7 +3,9 @@ package net.example.service;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import net.example.domain.enums.EventType;
-import net.example.dto.*;
+import net.example.dto.EventReadDto;
+import net.example.dto.FileCreateDto;
+import net.example.dto.FileReadDto;
 import net.example.dto.mapper.EventReadMapper;
 import net.example.dto.mapper.FileCreateMapper;
 import net.example.dto.mapper.FileReadMapper;
@@ -11,14 +13,14 @@ import net.example.exception.NotFoundException;
 import net.example.model.AppStatusCode;
 import net.example.repository.impl.EventRepositoryImpl;
 import net.example.repository.impl.FileRepositoryImpl;
-import net.example.util.AppContainer;
 
 import java.util.List;
 import java.util.Optional;
 
 @Transactional
 @RequiredArgsConstructor
-public class FileService implements CrudService<FileCreateDto, FileReadDto, Long>{
+public class FileService implements CrudService<FileCreateDto, FileReadDto, Long> {
+
     private final FileRepositoryImpl fileRepositoryImpl;
     private final EventRepositoryImpl eventRepositoryImpl;
 

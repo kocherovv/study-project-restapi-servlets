@@ -2,17 +2,12 @@ package net.example.controller;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.transaction.Transactional;
 import net.example.dto.UserCreateDto;
-import net.example.dto.UserReadDto;
 import net.example.util.AppContainer;
-import net.example.util.HibernateUtil;
 import net.example.util.PasswordHasher;
-import org.hibernate.Session;
 
 import java.io.IOException;
 
@@ -32,7 +27,7 @@ public class RegistrationServlet extends HttpServlet {
             .build());
 
         req.getSession().setAttribute("user", userDto);
-        resp.sendRedirect(getServletContext().getContextPath()+"/files");
+        resp.sendRedirect(getServletContext().getContextPath() + "/files");
     }
 
     @Override

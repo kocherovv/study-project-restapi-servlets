@@ -60,6 +60,7 @@ public class FileController extends HttpServlet {
 
             case DOWNLOAD -> {
                 var fileId = Long.valueOf(req.getParameter("file"));
+
                 fileService.findById(fileId)
                     .ifPresentOrElse(
                         file -> {

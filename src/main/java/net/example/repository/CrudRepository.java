@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public interface CrudRepository<E,ID extends Serializable> {
+public interface CrudRepository<E, ID extends Serializable> {
 
     List<E> findAll();
 

@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @RequiredArgsConstructor
-public abstract class RepositoryBase <E, ID extends Serializable> implements CrudRepository <E, ID> {
+public abstract class RepositoryBase<E, ID extends Serializable> implements CrudRepository<E, ID> {
     private final Class<E> clazz;
 
     private final EntityManager entityManager;

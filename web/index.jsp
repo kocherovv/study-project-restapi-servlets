@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Вход</title>
-    <link href="index.css" type="text/css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet">
 </head>
 <body>
 <h1>Вход в систему</h1>

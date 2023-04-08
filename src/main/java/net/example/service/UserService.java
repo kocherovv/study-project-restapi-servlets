@@ -2,7 +2,6 @@ package net.example.service;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import net.example.domain.entity.User;
 import net.example.dto.EventReadDto;
 import net.example.dto.UserCreateDto;
 import net.example.dto.UserReadDto;
@@ -13,9 +12,7 @@ import net.example.exception.NotFoundException;
 import net.example.model.AppStatusCode;
 import net.example.repository.impl.EventRepositoryImpl;
 import net.example.repository.impl.UserRepositoryImpl;
-import net.example.util.PasswordHasher;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 

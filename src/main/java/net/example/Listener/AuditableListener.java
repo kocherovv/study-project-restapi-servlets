@@ -6,7 +6,7 @@ import net.example.domain.entity.AuditableEntity;
 
 import java.time.Instant;
 
-public class AuditableListener <T extends AuditableEntity> {
+public class AuditableListener<T extends AuditableEntity> {
 
     @PrePersist
     public void fillPrePersistParameters(T entity) {

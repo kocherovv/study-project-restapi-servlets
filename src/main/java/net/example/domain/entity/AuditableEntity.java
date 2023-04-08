@@ -1,9 +1,11 @@
 package net.example.domain.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import net.example.Listener.AuditableListener;
 
 import java.time.Instant;
 

@@ -1,22 +1,15 @@
 package net.example.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.persistence.EntityManager;
-import lombok.AccessLevel;
-import lombok.Data;
+import jakarta.transaction.Transactional;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.experimental.UtilityClass;
 import net.example.dto.mapper.*;
 import net.example.repository.impl.EventRepositoryImpl;
 import net.example.repository.impl.FileRepositoryImpl;
 import net.example.repository.impl.UserRepositoryImpl;
-import net.example.service.CrudService;
 import net.example.service.EventService;
 import net.example.service.FileService;
 import net.example.service.UserService;
-import org.hibernate.Session;
-import org.hibernate.context.spi.CurrentSessionContext;
 
 @Getter
 public class AppContainer {

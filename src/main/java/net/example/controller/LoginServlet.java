@@ -40,6 +40,6 @@ public class LoginServlet extends HttpServlet {
     @SneakyThrows
     private void onLoginSuccess(HttpServletRequest req, HttpServletResponse resp, UserReadDto user) {
         req.getSession().setAttribute("user", user);
-        resp.sendRedirect(req.getContextPath()+"/files");
+        resp.sendRedirect(req.getContextPath() + "/files");
     }
 }

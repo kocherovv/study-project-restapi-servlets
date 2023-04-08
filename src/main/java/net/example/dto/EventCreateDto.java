@@ -1,6 +1,8 @@
 package net.example.dto;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import net.example.domain.entity.File;
 import net.example.domain.entity.User;
 import net.example.domain.enums.EventType;

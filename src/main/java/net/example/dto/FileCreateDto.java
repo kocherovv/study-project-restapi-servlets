@@ -1,6 +1,8 @@
 package net.example.dto;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 import java.time.Instant;
 import java.util.ArrayList;

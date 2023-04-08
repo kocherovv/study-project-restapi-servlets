@@ -3,7 +3,7 @@ package net.example.service;
 import java.util.List;
 import java.util.Optional;
 
-public interface CrudService <CreateDTO, ReadDTO, ID>{
+public interface CrudService<CreateDTO, ReadDTO, ID> {
 
     List<ReadDTO> findAll();
 
