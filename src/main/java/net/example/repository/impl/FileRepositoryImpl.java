@@ -19,12 +19,12 @@ public class FileRepositoryImpl extends RepositoryBase<File, Long> implements Fi
     public ArrayList<File> findAllByUserId(Long userId) {
         entityManager.getTransaction().begin();
 
-        var query = entityManager.createQuery(
-            "select f from File f left join Event e where e.user.id = :userId");
-        query.setParameter("userId", userId);
+        var files = (ArrayList<File>) entityManager.createQuery(
+            "select f from File f left join Event e where e.user.id = :userId")
+            .setParameter("userId", userId).getResultList();
 
         entityManager.getTransaction().commit();
 
-        return (ArrayList<File>) query.getResultList();
+        return files;
     }
 }

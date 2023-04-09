@@ -62,7 +62,7 @@ public class FileController extends HttpServlet {
                 var fileId = Long.valueOf(req.getParameter("file"));
 
                 fileService.findById(fileId)
-                    .ifPresentOrElse(
+                    .ifPresent(
                         file -> {
                             resp.setContentType("application/octet-stream");
                             resp.setContentLength(file.getContent().length);
@@ -74,9 +74,7 @@ public class FileController extends HttpServlet {
                             eventService.create(fileId, user.getId(), event);
 
                             updatePage(resp);
-                        },
-                        () -> updatePage(resp)
-                    );
+                        });
             }
 
             case DELETE -> {

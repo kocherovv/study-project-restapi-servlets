@@ -16,7 +16,7 @@
 <ul>
     <c:forEach var="files" items="${requestScope.files}">
         <li>${files.name}.${files.extension}
-            <form action=${pageContext.request.contextPath}/files?event=DOWNLOAD&file=${files.id}" method="post">
+            <form action="${pageContext.request.contextPath}/files?event=DOWNLOAD&file=${files.id}" method="post">
                 <button type="submit">Скачать</button>
                 <button formaction="${pageContext.request.contextPath}/files?event=DELETE&file=${files.id}" type="submit">Удалить</button>
             </form>
