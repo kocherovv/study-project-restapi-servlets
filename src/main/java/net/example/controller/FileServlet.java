@@ -19,7 +19,7 @@ import java.io.IOException;
 
 @MultipartConfig
 @WebServlet("/files")
-public class FileController extends HttpServlet {
+public class FileServlet extends HttpServlet {
 
     private final FileService fileService = AppContainer.getInstance().getFileService();
     private final EventService eventService = AppContainer.getInstance().getEventService();
