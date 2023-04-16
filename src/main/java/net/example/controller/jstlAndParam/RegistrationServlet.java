@@ -18,7 +18,7 @@ public class RegistrationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         var username = req.getParameter("username");
         var email = req.getParameter("email");
-        byte[] password = PasswordHasher.hashPassword(req.getParameter("password").getBytes());
+        var password = PasswordHasher.hashPassword(req.getParameter("password").getBytes());
 
         var userDto = AppContainer.getInstance().getUserService().create(UserCreateDto.builder()
             .name(username)

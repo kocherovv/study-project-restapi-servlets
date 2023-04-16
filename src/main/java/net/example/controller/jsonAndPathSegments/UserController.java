@@ -33,7 +33,7 @@ public class UserController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json");
         var pathInfo = req.getRequestURI();
-        String[] pathSegments = pathInfo.split("/");
+        var pathSegments = pathInfo.split("/");
 
         if (pathSegments.length == 3 && pathSegments[2].equals("user")) {
             var allUsers = userService.findAll();
@@ -104,7 +104,7 @@ public class UserController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json");
         var pathInfo = req.getRequestURI();
-        String[] pathSegments = pathInfo.split("/");
+        var pathSegments = pathInfo.split("/");
 
         if (pathSegments.length == 3 && pathSegments[2].equals("user")) {
             var username = req.getParameter("username");
@@ -146,7 +146,7 @@ public class UserController extends HttpServlet {
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json");
         var pathInfo = req.getRequestURI();
-        String[] pathSegments = pathInfo.split("/");
+        var pathSegments = pathInfo.split("/");
 
         if (pathSegments.length == 4 && pathSegments[2].equals("user")) {
             var userId = Long.valueOf(pathSegments[3]);
@@ -204,7 +204,7 @@ public class UserController extends HttpServlet {
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json");
         var pathInfo = req.getRequestURI();
-        String[] pathSegments = pathInfo.split("/");
+        var pathSegments = pathInfo.split("/");
 
         if (pathSegments.length == 4 && pathSegments[2].equals("user")) {
             var userId = Long.valueOf(pathSegments[3]);
