@@ -4,9 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
 @Builder
@@ -15,11 +13,7 @@ public class FileReadDto {
 
     private final Long id;
 
-    private final Instant createdAt;
-
-    private final Instant updatedAt;
-
-    private final String createdBy;
+    private final Long userId;
 
     private final String name;
 
@@ -27,7 +21,7 @@ public class FileReadDto {
 
     private final byte[] content;
 
-    @Builder.Default
-    private final List<EventReadDto> events = new ArrayList<>();
+    private final LocalDateTime createdAt;
 
+    private final LocalDateTime updatedAt;
 }

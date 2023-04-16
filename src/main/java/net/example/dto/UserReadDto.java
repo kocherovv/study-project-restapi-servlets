@@ -19,5 +19,8 @@ public class UserReadDto {
     private final String email;
 
     @Builder.Default
-    private final List<EventReadDto> events = new ArrayList<>();
+    private final List<Long> eventsId = new ArrayList<>();
+
+    @Builder.Default
+    private final List<Long> filesId = new ArrayList<>();
 }

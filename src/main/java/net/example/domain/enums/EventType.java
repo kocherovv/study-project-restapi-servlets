@@ -4,5 +4,5 @@ public enum EventType {
     DOWNLOAD,
     UPLOAD,
     UPDATE,
-    DELETE,
+    DELETE, READ,
 }

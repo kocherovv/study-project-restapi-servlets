@@ -19,5 +19,8 @@ public class UserCreateDto {
     private final byte[] password;
 
     @Builder.Default
-    private final List<Long> events_id = new ArrayList<>();
+    private final List<Long> eventsId = new ArrayList<>();
+
+    @Builder.Default
+    private final List<Long> filesId = new ArrayList<>();
 }

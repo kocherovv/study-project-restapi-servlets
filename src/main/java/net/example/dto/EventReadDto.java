@@ -3,11 +3,9 @@ package net.example.dto;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import net.example.domain.entity.File;
-import net.example.domain.entity.User;
 import net.example.domain.enums.EventType;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
 @Builder
@@ -16,15 +14,13 @@ public class EventReadDto {
 
     private final Long id;
 
-    private final User user;
+    private final Long userId;
 
-    private final File file;
+    private final String fileInfo;
 
     private final EventType eventType;
 
-    private final Instant createdAt;
+    private final LocalDateTime createdAt;
 
-    private final Instant updatedAt;
-
-    private final String createdBy;
+    private final LocalDateTime updatedAt;
 }

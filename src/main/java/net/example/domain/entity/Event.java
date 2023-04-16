@@ -6,27 +6,36 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import net.example.Listener.AuditableListener;
+import net.example.Listener.EventListener;
 import net.example.domain.enums.EventType;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
 @Entity
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(of = "id")
 @Table(name = "event")
-@EntityListeners(AuditableListener.class)
-public class Event extends AuditableEntity {
+@EntityListeners(EventListener.class)
+public class Event {
 
-    @ManyToOne
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "file_id")
-    private File file;
+    @JdbcTypeCode(SqlTypes.JSON)
+    private String fileInfo;
 
     @Enumerated(EnumType.STRING)
     private EventType eventType;
+
+    private LocalDateTime createdAt;
 }

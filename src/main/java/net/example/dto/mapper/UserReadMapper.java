@@ -15,9 +15,6 @@ public class UserReadMapper implements Mapper<UserReadDto, User> {
             .id(source.getId())
             .name(source.getName())
             .email(source.getEmail())
-            .events(source.getEvents().stream()
-                .map(eventReadMapper::mapFrom)
-                .toList())
             .build();
     }
 }

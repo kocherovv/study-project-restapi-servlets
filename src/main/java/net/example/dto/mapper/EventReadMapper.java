@@ -9,10 +9,9 @@ public class EventReadMapper implements Mapper<EventReadDto, Event> {
         return EventReadDto.builder()
             .id(source.getId())
             .eventType(source.getEventType())
-            .user(source.getUser())
-            .file(source.getFile())
+            .userId(source.getUser().getId())
+            .fileInfo(source.getFileInfo())
             .createdAt(source.getCreatedAt())
-            .updatedAt(source.getUpdatedAt())
             .build();
     }
 }

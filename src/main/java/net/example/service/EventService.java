@@ -1,17 +1,21 @@
 package net.example.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import net.example.database.repository.impl.EventRepositoryImpl;
+import net.example.database.repository.impl.FileRepositoryImpl;
+import net.example.database.repository.impl.UserRepositoryImpl;
 import net.example.domain.enums.EventType;
 import net.example.dto.EventCreateDto;
 import net.example.dto.EventReadDto;
 import net.example.dto.mapper.EventCreateMapper;
 import net.example.dto.mapper.EventReadMapper;
+import net.example.dto.mapper.FileInfoDtoMapper;
+import net.example.dto.mapper.FileReadMapper;
 import net.example.exception.NotFoundException;
 import net.example.model.AppStatusCode;
-import net.example.repository.impl.EventRepositoryImpl;
-import net.example.repository.impl.FileRepositoryImpl;
-import net.example.repository.impl.UserRepositoryImpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +30,10 @@ public class EventService implements CrudService<EventCreateDto, EventReadDto, L
 
     private final EventCreateMapper eventCreateMapper;
     private final EventReadMapper eventReadMapper;
+    private final FileReadMapper fileReadMapper;
+    private final FileInfoDtoMapper fileInfoDtoMapper;
+
+    private final ObjectMapper jsonMapper;
 
     public List<EventReadDto> findAll() {
         return eventRepositoryImpl.findAll().stream()
@@ -42,12 +50,15 @@ public class EventService implements CrudService<EventCreateDto, EventReadDto, L
         return eventReadMapper.mapFrom(eventRepositoryImpl.create(eventCreateMapper.mapFrom(eventCreateDto)));
     }
 
-    public EventReadDto create(Long fileId, Long userId, EventType eventType) {
+    public EventReadDto create(Long fileId, Long userId, EventType eventType) throws JsonProcessingException {
         var dto = EventCreateDto.builder()
             .eventType(eventType)
-            .user(userRepositoryImpl.findById(userId).orElseThrow(NotFoundException::new))
-            .file(fileRepositoryImpl.findById(fileId).orElseThrow(NotFoundException::new))
+            .userId(userId)
+            .fileInfo(jsonMapper.writeValueAsString(
+                fileInfoDtoMapper.mapFrom(fileRepositoryImpl.findById(fileId)
+                    .orElseThrow(NotFoundException::new))))
             .build();
+
         return eventReadMapper.mapFrom(eventRepositoryImpl.create(eventCreateMapper.mapFrom(dto)));
     }
 
@@ -56,17 +67,21 @@ public class EventService implements CrudService<EventCreateDto, EventReadDto, L
             .orElseThrow(NotFoundException::new);
 
         event.setEventType(eventReadDto.getEventType());
-        event.setUser(eventReadDto.getUser());
-        event.setFile(eventReadDto.getFile());
+        event.setUser(userRepositoryImpl.findById(eventReadDto.getUserId()).orElseThrow(NotFoundException::new));
 
         return eventReadMapper.mapFrom(eventRepositoryImpl.update(event));
     }
 
-    public void deleteById(Long id) throws NotFoundException {
+    public void deleteById(Long id) {
         eventRepositoryImpl.findById(id).ifPresentOrElse(
             eventRepositoryImpl::delete,
             () -> {
                 throw new NotFoundException(AppStatusCode.NOT_FOUND_EXCEPTION);
             });
+    }
+
+    public List<EventReadDto> findAllByUserId(Long userId) {
+        return eventRepositoryImpl.findAllByUserId(userId).stream()
+            .map(eventReadMapper::mapFrom).toList();
     }
 }

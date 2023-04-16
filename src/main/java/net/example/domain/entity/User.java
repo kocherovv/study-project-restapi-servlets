@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Entity
-@ToString(exclude = "events")
+@ToString(exclude = {"events", "files"})
 @EqualsAndHashCode(of = "id")
 @Table(name = "users")
 public class User {
@@ -26,7 +26,11 @@ public class User {
 
     private byte[] password;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user")
     @Builder.Default
     private List<Event> events = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    @Builder.Default
+    private List<File> files = new ArrayList<>();
 }
