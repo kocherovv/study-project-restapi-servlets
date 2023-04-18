@@ -21,8 +21,8 @@ import java.io.IOException;
 import java.io.NotActiveException;
 
 @MultipartConfig
-@WebServlet(urlPatterns = {"/user", "/user/*"})
-public class UserController extends HttpServlet {
+@WebServlet(urlPatterns = "/user/*")
+public class UserRestController extends HttpServlet {
 
     private final FileService fileService = AppContainer.getInstance().getFileService();
     private final UserService userService = AppContainer.getInstance().getUserService();

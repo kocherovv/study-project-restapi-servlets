@@ -1,4 +1,4 @@
-package net.example.Listener;
+package net.example.listener;
 
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
