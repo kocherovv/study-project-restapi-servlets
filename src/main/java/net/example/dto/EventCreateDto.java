@@ -20,7 +20,5 @@ public class EventCreateDto {
 
     private final LocalDateTime createdAt;
 
-    private final LocalDateTime updatedAt;
-
     private final String createdBy;
 }

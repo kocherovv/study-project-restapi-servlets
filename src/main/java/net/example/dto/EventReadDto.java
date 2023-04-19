@@ -21,6 +21,4 @@ public class EventReadDto {
     private final EventType eventType;
 
     private final LocalDateTime createdAt;
-
-    private final LocalDateTime updatedAt;
 }

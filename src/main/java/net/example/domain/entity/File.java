@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import net.example.listener.FileListener;
 
 import java.time.LocalDateTime;
 
@@ -17,7 +16,6 @@ import java.time.LocalDateTime;
 @Entity
 @EqualsAndHashCode(of = "id")
 @Table(name = "file")
-@EntityListeners(FileListener.class)
 public class File {
 
     @Id
@@ -37,4 +35,15 @@ public class File {
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
+
+    @PrePersist
+    public void fillPrePersistParameters() {
+        this.setCreatedAt(LocalDateTime.now());
+        this.setUpdatedAt(LocalDateTime.now());
+    }
+
+    @PreUpdate
+    public void updateLastChangeDate() {
+        this.setUpdatedAt(LocalDateTime.now());
+    }
 }

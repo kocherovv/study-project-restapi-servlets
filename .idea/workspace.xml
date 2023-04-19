@@ -10,13 +10,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="55c5d152-5564-4e76-9ceb-b6e734f69822" name="Changes" comment="controller">
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/example/controller/restApi/FileRestController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/example/controller/restApi/UserServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/example/controller/EventRestController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/example/controller/FileRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/study_project_restapi_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/study_project_restapi_war_exploded.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/6d92b55a-471d-4d4c-b61a-d4b6d501517f.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/6d92b55a-471d-4d4c-b61a-d4b6d501517f.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/6d92b55a-471d-4d4c-b61a-d4b6d501517f/storage_v2/_src_/database/postgres.edMnLQ/schema/study_schema_restapi.Xj4tHw.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/6d92b55a-471d-4d4c-b61a-d4b6d501517f/storage_v2/_src_/database/postgres.edMnLQ/schema/study_schema_restapi.Xj4tHw.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/Listener/EventListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/example/listener/EventListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/Listener/FileListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/example/listener/FileListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/controller/jsonAndPathSegments/UserRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/example/controller/UserRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/controller/jstlAndParam/FileServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/controller/jstlAndParam/LoginServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/controller/jstlAndParam/LogoutServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/controller/jstlAndParam/RegistrationServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/controller/restApi/FileRestController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/controller/restApi/UserServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/converters/JsonConverter.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/example/domain/entity/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/example/domain/entity/Event.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/example/domain/entity/File.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/example/domain/entity/File.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/domain/enums/ReadOperationType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/dto/EventCreateDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/example/dto/EventCreateDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/dto/EventReadDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/example/dto/EventReadDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/listener/EventListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/listener/FileListener.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +51,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -273,7 +292,7 @@
       <workItem from="1679044596469" duration="41056000" />
       <workItem from="1679405309815" duration="45430000" />
       <workItem from="1680167256778" duration="12272000" />
-      <workItem from="1680774657956" duration="140015000" />
+      <workItem from="1680774657956" duration="150934000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <created>1679407185980</created>
@@ -345,7 +364,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681651800019</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="controller">
+      <created>1681847172164</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1681847172164</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -356,7 +382,24 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="ver1" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -368,6 +411,15 @@
     <option name="LAST_COMMIT_MESSAGE" value="controller" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/net/example/controller/FileRestController.java</url>
+          <line>127</line>
+          <option name="timeStamp" value="44" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="org.apache.catalina.connector.Request" memberName="session" />

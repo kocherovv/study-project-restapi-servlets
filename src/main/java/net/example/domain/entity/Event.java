@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import net.example.listener.EventListener;
 import net.example.domain.enums.EventType;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
@@ -20,7 +19,6 @@ import java.time.LocalDateTime;
 @Entity
 @EqualsAndHashCode(of = "id")
 @Table(name = "event")
-@EntityListeners(EventListener.class)
 public class Event {
 
     @Id
@@ -38,4 +36,9 @@ public class Event {
     private EventType eventType;
 
     private LocalDateTime createdAt;
+
+    @PrePersist
+    public void fillPrePersistParameters() {
+        this.setCreatedAt(LocalDateTime.now());
+    }
 }

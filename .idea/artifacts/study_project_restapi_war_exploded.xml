@@ -38,6 +38,7 @@
           <element id="library" level="project" name="Maven: com.vladmihalcea:hibernate-types-60:2.21.1" />
           <element id="library" level="project" name="Maven: javax.xml.bind:jaxb-api:2.3.0" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.14.2" />
+          <element id="library" level="project" name="Maven: jakarta.servlet:jakarta.servlet-api:6.0.0" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="study-project-restapi/web/Web" />
