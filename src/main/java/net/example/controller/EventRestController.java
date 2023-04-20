@@ -6,7 +6,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.SneakyThrows;
 import net.example.domain.enums.EventType;
 import net.example.dto.EventCreateDto;
 import net.example.dto.EventReadDto;
@@ -59,9 +58,9 @@ public class EventRestController extends HttpServlet {
         var pathInfo = req.getRequestURI();
         var pathSegments = pathInfo.split("/");
 
-        if (pathSegments.length == 3 && pathSegments[2].equals("file")) {
+        if (pathSegments.length == 3 && pathSegments[2].equals("events")) {
             var userId = Long.valueOf(req.getParameter("userId"));
-            var fileId = Long.valueOf(req.getParameter("file"));
+            var fileId = Long.valueOf(req.getParameter("fileId"));
             var eventType = EventType.valueOf(req.getParameter("eventType"));
 
             var newEvent = eventService.create(EventCreateDto.builder()
@@ -71,8 +70,6 @@ public class EventRestController extends HttpServlet {
                     fileService.findById(fileId)
                         .orElseThrow(NotFoundException::new)))
                 .build());
-
-            eventService.create(newEvent.getId(), userId, EventType.UPLOAD);
 
             resp.getWriter().println(jsonMapper.writeValueAsString(newEvent));
         } else {
@@ -114,10 +111,5 @@ public class EventRestController extends HttpServlet {
 
             eventService.deleteById(eventId);
         }
-    }
-
-    @SneakyThrows
-    private void updatePage(HttpServletResponse resp) {
-        resp.sendRedirect(getServletContext().getContextPath() + "/events");
     }
 }

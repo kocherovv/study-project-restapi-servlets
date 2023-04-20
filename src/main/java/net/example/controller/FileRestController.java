@@ -11,6 +11,7 @@ import lombok.SneakyThrows;
 import net.example.domain.enums.EventType;
 import net.example.dto.FileCreateDto;
 import net.example.dto.FileReadDto;
+import net.example.exception.NotFoundException;
 import net.example.service.EventService;
 import net.example.service.FileService;
 import net.example.util.AppContainer;
@@ -51,11 +52,16 @@ public class FileRestController extends HttpServlet {
             } catch (Exception e) {
                 resp.sendError(HttpServletResponse.SC_NOT_FOUND);
             }
-        } else if (pathSegments.length == 5 && pathSegments[2].equals("file") && pathSegments[4].equals("download")) {
+        } else if (pathSegments.length == 5 && pathSegments[2].equals("files") && pathSegments[4].equals("download")) {
             try {
                 var fileId = Long.valueOf(pathSegments[3]);
 
-                var downloadFile = fileService.downloadById(fileId).orElseThrow(NotActiveException::new);
+                var downloadFile = fileService.downloadById(fileId).orElseThrow(NotFoundException::new);
+
+                resp.setContentType("application/octet-stream");
+                resp.setContentLength(downloadFile.getContent().length);
+                resp.setHeader("Content-Disposition",
+                    "attachment; filename=" + downloadFile.getName() + "." + downloadFile.getExtension());
 
                 eventService.create(fileId, Long.valueOf(userId), EventType.DOWNLOAD);
 
@@ -72,7 +78,7 @@ public class FileRestController extends HttpServlet {
         var pathInfo = req.getRequestURI();
         var pathSegments = pathInfo.split("/");
 
-        if (pathSegments.length == 3 && pathSegments[2].equals("file")) {
+        if (pathSegments.length == 3 && pathSegments[2].equals("files")) {
             var userId = Long.valueOf(req.getParameter("userId"));
             var filePart = req.getPart("file");
             var splitName = filePart.getSubmittedFileName().split("\\.");
@@ -100,7 +106,7 @@ public class FileRestController extends HttpServlet {
         var pathInfo = req.getRequestURI();
         var pathSegments = pathInfo.split("/");
 
-        if (pathSegments.length == 4 && pathSegments[2].equals("file")) {
+        if (pathSegments.length == 4 && pathSegments[2].equals("files")) {
             var userId = Long.valueOf(req.getParameter("userId"));
             var fileId = Long.valueOf(pathSegments[3]);
             var name = req.getParameter("fileName");
@@ -144,10 +150,5 @@ public class FileRestController extends HttpServlet {
     @SneakyThrows
     private static void writeFileOutputStream(HttpServletResponse resp, FileReadDto file) {
         resp.getOutputStream().write(file.getContent());
-    }
-
-    @SneakyThrows
-    private void updatePage(HttpServletResponse resp) {
-        resp.sendRedirect(getServletContext().getContextPath() + "/files");
     }
 }
