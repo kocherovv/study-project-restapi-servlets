@@ -1,5 +1,6 @@
 package net.example.service;
 
+import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import net.example.database.repository.impl.EventRepositoryImpl;
@@ -18,47 +19,82 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserService implements CrudService<UserCreateDto, UserReadDto, Long> {
 
+    private final EntityManager entityManager;
+
     private final UserRepositoryImpl userRepositoryImpl;
-    private final EventRepositoryImpl eventRepositoryImpl;
 
     private final UserCreateMapper userCreateMapper;
     private final UserReadMapper userReadMapper;
 
     public List<UserReadDto> findAll() {
-        return userRepositoryImpl.findAll().stream()
+        entityManager.getTransaction().begin();
+
+        var users = userRepositoryImpl.findAll().stream()
             .map(userReadMapper::mapFrom)
             .toList();
+
+        entityManager.getTransaction().commit();
+
+        return users;
     }
 
     public Optional<UserReadDto> findById(Long id) {
-        return userRepositoryImpl.findById(id)
+        entityManager.getTransaction().begin();
+
+        var users = userRepositoryImpl.findById(id)
             .map(userReadMapper::mapFrom);
+
+        entityManager.getTransaction().commit();
+
+        return users;
     }
 
     public UserReadDto create(UserCreateDto dto) {
-        return userReadMapper.mapFrom(userRepositoryImpl.create(userCreateMapper.mapFrom(dto)));
+        entityManager.getTransaction().begin();
+
+        var newUser = userReadMapper.mapFrom(userRepositoryImpl.create(userCreateMapper.mapFrom(dto)));
+
+        entityManager.getTransaction().commit();
+
+        return newUser;
     }
 
     public UserReadDto update(UserReadDto dto) throws NotFoundException {
+        entityManager.getTransaction().begin();
+
         var event = userRepositoryImpl.findById(dto.getId())
             .orElseThrow(NotFoundException::new);
 
         event.setName(dto.getName());
         event.setEmail(dto.getEmail());
 
-        return userReadMapper.mapFrom(userRepositoryImpl.update(event));
+        var updatedUser = userReadMapper.mapFrom(userRepositoryImpl.update(event));
+
+        entityManager.getTransaction().commit();
+
+        return updatedUser;
     }
 
     public void deleteById(Long id) throws NotFoundException {
+        entityManager.getTransaction().begin();
+
         userRepositoryImpl.findById(id).ifPresentOrElse(
             userRepositoryImpl::delete,
             () -> {
                 throw new NotFoundException(AppStatusCode.NOT_FOUND_EXCEPTION);
             });
+
+        entityManager.getTransaction().commit();
     }
 
     public Optional<UserReadDto> findByUserNameAndPassword(String username, byte[] password) {
-        return userRepositoryImpl.findByUserNameAndPassword(username, password)
+        entityManager.getTransaction().begin();
+
+        var user = userRepositoryImpl.findByUserNameAndPassword(username, password)
             .map(userReadMapper::mapFrom);
+
+        entityManager.getTransaction().commit();
+
+        return user;
     }
 }

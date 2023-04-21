@@ -2,6 +2,7 @@ package net.example.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import net.example.database.repository.impl.EventRepositoryImpl;
@@ -24,33 +25,42 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class EventService implements CrudService<EventCreateDto, EventReadDto, Long> {
 
+    private final EntityManager entityManager;
+
     private final EventRepositoryImpl eventRepositoryImpl;
     private final UserRepositoryImpl userRepositoryImpl;
     private final FileRepositoryImpl fileRepositoryImpl;
 
     private final EventCreateMapper eventCreateMapper;
     private final EventReadMapper eventReadMapper;
-    private final FileReadMapper fileReadMapper;
     private final FileInfoDtoMapper fileInfoDtoMapper;
 
     private final ObjectMapper jsonMapper;
 
     public List<EventReadDto> findAll() {
+        entityManager.getTransaction().begin();
+
         return eventRepositoryImpl.findAll().stream()
             .map(eventReadMapper::mapFrom)
             .toList();
     }
 
     public Optional<EventReadDto> findById(Long id) {
+        entityManager.getTransaction().begin();
+
         return eventRepositoryImpl.findById(id)
             .map(eventReadMapper::mapFrom);
     }
 
     public EventReadDto create(EventCreateDto eventCreateDto) {
+        entityManager.getTransaction().begin();
+
         return eventReadMapper.mapFrom(eventRepositoryImpl.create(eventCreateMapper.mapFrom(eventCreateDto)));
     }
 
     public EventReadDto create(Long fileId, Long userId, EventType eventType) throws JsonProcessingException {
+        entityManager.getTransaction().begin();
+
         var dto = EventCreateDto.builder()
             .eventType(eventType)
             .userId(userId)
@@ -63,6 +73,8 @@ public class EventService implements CrudService<EventCreateDto, EventReadDto, L
     }
 
     public EventReadDto update(EventReadDto eventReadDto) {
+        entityManager.getTransaction().begin();
+
         var event = eventRepositoryImpl.findById(eventReadDto.getId())
             .orElseThrow(NotFoundException::new);
 
@@ -73,6 +85,8 @@ public class EventService implements CrudService<EventCreateDto, EventReadDto, L
     }
 
     public void deleteById(Long id) {
+        entityManager.getTransaction().begin();
+
         eventRepositoryImpl.findById(id).ifPresentOrElse(
             eventRepositoryImpl::delete,
             () -> {
@@ -81,6 +95,8 @@ public class EventService implements CrudService<EventCreateDto, EventReadDto, L
     }
 
     public List<EventReadDto> findAllByUserId(Long userId) {
+        entityManager.getTransaction().begin();
+
         return eventRepositoryImpl.findAllByUserId(userId).stream()
             .map(eventReadMapper::mapFrom).toList();
     }

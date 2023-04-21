@@ -54,11 +54,11 @@ public class AppContainer {
         jsonMapper.findAndRegisterModules()
             .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
-        userService = new UserService(userRepository, eventRepository, userCreateMapper,
+        userService = new UserService(session, userRepository, userCreateMapper,
             userReadMapper);
-        fileService = new FileService(fileRepository, userRepository, fileCreateMapper,
+        fileService = new FileService(session, fileRepository, userRepository, fileCreateMapper,
             fileReadMapper, fileInfoDtoMapper);
-        eventService = new EventService(eventRepository, userRepository, fileRepository, eventCreateMapper, eventReadMapper, fileReadMapper, fileInfoDtoMapper, jsonMapper);
+        eventService = new EventService(session, eventRepository, userRepository, fileRepository, eventCreateMapper, eventReadMapper, fileInfoDtoMapper, jsonMapper);
     }
 
     public static AppContainer getInstance() {

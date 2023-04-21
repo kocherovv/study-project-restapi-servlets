@@ -1,5 +1,6 @@
 package net.example.service;
 
+import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import net.example.database.repository.impl.FileRepositoryImpl;
@@ -13,6 +14,7 @@ import net.example.dto.mapper.FileInfoDtoMapper;
 import net.example.dto.mapper.FileReadMapper;
 import net.example.exception.NotFoundException;
 import net.example.model.AppStatusCode;
+import net.example.util.AppContainer;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +22,8 @@ import java.util.Optional;
 @Transactional
 @RequiredArgsConstructor
 public class FileService implements CrudService<FileCreateDto, FileInfoDto, Long> {
+
+    private final EntityManager entityManager;
 
     private final FileRepositoryImpl fileRepositoryImpl;
     private final UserRepositoryImpl userRepositoryImpl;
@@ -29,26 +33,52 @@ public class FileService implements CrudService<FileCreateDto, FileInfoDto, Long
     private final FileInfoDtoMapper fileInfoDtoMapper;
 
     public List<FileInfoDto> findAll() {
-        return fileRepositoryImpl.findAll().stream()
+        entityManager.getTransaction().begin();
+
+        var files = fileRepositoryImpl.findAll().stream()
             .map(fileInfoDtoMapper::mapFrom)
             .toList();
+
+        entityManager.getTransaction().commit();
+
+        return files;
     }
 
     public Optional<FileInfoDto> findById(Long id) {
-        return fileRepositoryImpl.findById(id)
+        entityManager.getTransaction().begin();
+
+        var file = fileRepositoryImpl.findById(id)
             .map(fileInfoDtoMapper::mapFrom);
+
+        entityManager.getTransaction().commit();
+
+        return file;
     }
 
     public Optional<FileInfoDto> findById(Long id, EventType eventType) {
-        return fileRepositoryImpl.findById(id)
+        entityManager.getTransaction().begin();
+
+        var file = fileRepositoryImpl.findById(id)
             .map(fileInfoDtoMapper::mapFrom);
+
+        entityManager.getTransaction().commit();
+
+        return file;
     }
 
     public FileInfoDto create(FileCreateDto dto) {
-        return fileInfoDtoMapper.mapFrom(fileRepositoryImpl.create(fileCreateMapper.mapFrom(dto)));
+        entityManager.getTransaction().begin();
+
+        var file = fileInfoDtoMapper.mapFrom(fileRepositoryImpl.create(fileCreateMapper.mapFrom(dto)));
+
+        entityManager.getTransaction().commit();
+
+        return file;
     }
 
     public FileInfoDto update(FileInfoDto fileInfoDto) {
+        entityManager.getTransaction().begin();
+
         var event = fileRepositoryImpl.findById(fileInfoDto.getId())
             .orElseThrow(NotFoundException::new);
 
@@ -57,10 +87,16 @@ public class FileService implements CrudService<FileCreateDto, FileInfoDto, Long
         event.setUser(userRepositoryImpl.findById(fileInfoDto.getUserId())
             .orElseThrow(NotFoundException::new));
 
-        return fileInfoDtoMapper.mapFrom(fileRepositoryImpl.update(event));
+        var file = fileInfoDtoMapper.mapFrom(fileRepositoryImpl.update(event));
+
+        entityManager.getTransaction().commit();
+
+        return file;
     }
 
     public FileInfoDto update(FileReadDto dto) throws NotFoundException {
+        entityManager.getTransaction().begin();
+
         var event = fileRepositoryImpl.findById(dto.getId())
             .orElseThrow(NotFoundException::new);
 
@@ -70,25 +106,45 @@ public class FileService implements CrudService<FileCreateDto, FileInfoDto, Long
         event.setUser(userRepositoryImpl.findById(dto.getUserId())
             .orElseThrow(NotFoundException::new));
 
-        return fileInfoDtoMapper.mapFrom(fileRepositoryImpl.update(event));
+        var file = fileInfoDtoMapper.mapFrom(fileRepositoryImpl.update(event));
+
+        entityManager.getTransaction().commit();
+
+        return file;
     }
 
     public void deleteById(Long id) throws NotFoundException {
+        entityManager.getTransaction().begin();
+
         fileRepositoryImpl.findById(id).ifPresentOrElse(
             fileRepositoryImpl::delete,
             () -> {
                 throw new NotFoundException(AppStatusCode.NOT_FOUND_EXCEPTION);
             });
+
+        entityManager.getTransaction().commit();
     }
 
     public List<FileInfoDto> findAllByUserId(Long id) {
-        return fileRepositoryImpl.findAllByUserId(id).stream()
+        entityManager.getTransaction().begin();
+
+        var files = fileRepositoryImpl.findAllByUserId(id).stream()
             .map(fileInfoDtoMapper::mapFrom)
             .toList();
+
+        entityManager.getTransaction().commit();
+
+        return files;
     }
 
     public Optional<FileReadDto> downloadById(Long id) {
-        return fileRepositoryImpl.findById(id)
+        entityManager.getTransaction().begin();
+
+        var fileReadDto = fileRepositoryImpl.findById(id)
             .map(fileReadMapper::mapFrom);
+
+        entityManager.getTransaction().commit();
+
+        return fileReadDto;
     }
 }
