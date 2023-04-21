@@ -142,6 +142,7 @@ public class FileRestController extends HttpServlet {
             eventService.create(fileId, userId, EventType.DELETE);
 
             fileService.deleteById(fileId);
+            resp.sendError(HttpServletResponse.SC_NO_CONTENT);
         } else {
             resp.sendError(400);
         }

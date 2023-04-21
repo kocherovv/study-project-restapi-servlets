@@ -110,6 +110,7 @@ public class EventRestController extends HttpServlet {
             var eventId = Long.valueOf(pathSegments[3]);
 
             eventService.deleteById(eventId);
+            resp.sendError(HttpServletResponse.SC_NO_CONTENT);
         }
     }
 }

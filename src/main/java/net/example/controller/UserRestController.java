@@ -101,6 +101,7 @@ public class UserRestController extends HttpServlet {
             var userId = Long.valueOf(pathSegments[3]);
 
             userService.deleteById(userId);
+            resp.sendError(HttpServletResponse.SC_NO_CONTENT);
 
         } else {
             resp.sendError(404);
