@@ -42,9 +42,7 @@ public class EventRestController extends HttpServlet {
         } else if (pathSegments.length == 4 && pathSegments[2].equals("events")) {
             try {
                 var eventId = Long.valueOf(pathSegments[3]);
-
                 var event = eventService.findById(eventId).orElseThrow(NotActiveException::new);
-
                 resp.getWriter().write(jsonMapper.writeValueAsString(event));
             } catch (Exception e) {
                 resp.sendError(HttpServletResponse.SC_NOT_FOUND);

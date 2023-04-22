@@ -10,12 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="55c5d152-5564-4e76-9ceb-b6e734f69822" name="Changes" comment="controller">
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/JSP/files.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/JSP/header.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/JSP/login.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/JSP/registration.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/index.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/example/controller/EventRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/example/controller/EventRestController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -277,7 +273,7 @@
       <workItem from="1679044596469" duration="41056000" />
       <workItem from="1679405309815" duration="45430000" />
       <workItem from="1680167256778" duration="12272000" />
-      <workItem from="1680774657956" duration="160745000" />
+      <workItem from="1680774657956" duration="161749000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <created>1679407185980</created>
@@ -377,7 +373,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682088551449</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="controller">
+      <created>1682090540961</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1682090540961</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
