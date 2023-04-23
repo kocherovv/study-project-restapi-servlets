@@ -10,7 +10,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Builder
 @Data
-public class UserReadDto {
+public class UserReadDto extends AbstractReadDto {
 
     private final Long id;
 

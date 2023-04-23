@@ -18,24 +18,21 @@ public abstract class RepositoryBase<E, ID extends Serializable> implements Crud
     public List<E> findAll() {
         var criteriaQuery = entityManager.getCriteriaBuilder().createQuery(clazz);
         criteriaQuery.from(clazz);
-        var resultList = entityManager.createQuery(criteriaQuery)
-            .getResultList();
 
-        return resultList;
+        return entityManager.createQuery(criteriaQuery)
+            .getResultList();
     }
 
     @Override
     public Optional<E> findById(ID id) {
-        var entity = Optional.ofNullable(entityManager.find(clazz, id));
 
-        return entity;
+        return Optional.ofNullable(entityManager.find(clazz, id));
     }
 
     @Override
     public Optional<E> findById(ID id, Map<String, Object> properties) {
-        var entity = Optional.ofNullable(entityManager.find(clazz, id, properties));
 
-        return entity;
+        return Optional.ofNullable(entityManager.find(clazz, id, properties));
     }
 
     @Override

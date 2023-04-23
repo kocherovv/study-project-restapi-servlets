@@ -5,6 +5,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import net.example.database.repository.impl.FileRepositoryImpl;
 import net.example.database.repository.impl.UserRepositoryImpl;
+import net.example.domain.entity.File;
 import net.example.domain.enums.EventType;
 import net.example.dto.FileCreateDto;
 import net.example.dto.FileInfoDto;
@@ -21,7 +22,7 @@ import java.util.Optional;
 
 @Transactional
 @RequiredArgsConstructor
-public class FileService implements CrudService<FileCreateDto, FileInfoDto, Long> {
+public class FileService implements CrudService<File, FileInfoDto> {
 
     private final EntityManager entityManager;
 
@@ -44,79 +45,50 @@ public class FileService implements CrudService<FileCreateDto, FileInfoDto, Long
         return files;
     }
 
-    public Optional<FileInfoDto> findById(Long id) {
+    public Optional<FileInfoDto> findById(File file) {
         entityManager.getTransaction().begin();
 
-        var file = fileRepositoryImpl.findById(id)
+        var entity = fileRepositoryImpl.findById(file.getId())
             .map(fileInfoDtoMapper::mapFrom);
 
         entityManager.getTransaction().commit();
 
-        return file;
+        return entity;
     }
 
-    public Optional<FileInfoDto> findById(Long id, EventType eventType) {
+    public FileInfoDto create(File entity) {
         entityManager.getTransaction().begin();
 
-        var file = fileRepositoryImpl.findById(id)
-            .map(fileInfoDtoMapper::mapFrom);
+        var file = fileInfoDtoMapper.mapFrom(fileRepositoryImpl.create(entity));
 
         entityManager.getTransaction().commit();
 
         return file;
     }
 
-    public FileInfoDto create(FileCreateDto dto) {
+    public FileInfoDto update(File entity) throws NotFoundException {
         entityManager.getTransaction().begin();
 
-        var file = fileInfoDtoMapper.mapFrom(fileRepositoryImpl.create(fileCreateMapper.mapFrom(dto)));
-
-        entityManager.getTransaction().commit();
-
-        return file;
-    }
-
-    public FileInfoDto update(FileInfoDto fileInfoDto) {
-        entityManager.getTransaction().begin();
-
-        var event = fileRepositoryImpl.findById(fileInfoDto.getId())
+        var file = fileRepositoryImpl.findById(entity.getId())
             .orElseThrow(NotFoundException::new);
 
-        event.setName(fileInfoDto.getName());
-        event.setExtension(fileInfoDto.getExtension());
-        event.setUser(userRepositoryImpl.findById(fileInfoDto.getUserId())
+        file.setContent(entity.getContent());
+        file.setName(entity.getName());
+        file.setExtension(entity.getExtension());
+        file.setUser(userRepositoryImpl.findById(entity.getUser().getId())
             .orElseThrow(NotFoundException::new));
 
-        var file = fileInfoDtoMapper.mapFrom(fileRepositoryImpl.update(event));
+        var updatedFile = fileInfoDtoMapper.mapFrom(fileRepositoryImpl.update(file));
 
         entityManager.getTransaction().commit();
 
-        return file;
+        return updatedFile;
     }
 
-    public FileInfoDto update(FileReadDto dto) throws NotFoundException {
+    public void deleteById(File entity) throws NotFoundException {
         entityManager.getTransaction().begin();
 
-        var event = fileRepositoryImpl.findById(dto.getId())
-            .orElseThrow(NotFoundException::new);
-
-        event.setContent(dto.getContent());
-        event.setName(dto.getName());
-        event.setExtension(dto.getExtension());
-        event.setUser(userRepositoryImpl.findById(dto.getUserId())
-            .orElseThrow(NotFoundException::new));
-
-        var file = fileInfoDtoMapper.mapFrom(fileRepositoryImpl.update(event));
-
-        entityManager.getTransaction().commit();
-
-        return file;
-    }
-
-    public void deleteById(Long id) throws NotFoundException {
-        entityManager.getTransaction().begin();
-
-        fileRepositoryImpl.findById(id).ifPresentOrElse(
+        fileRepositoryImpl.findById(entity.getId()).ifPresentOrElse(
             fileRepositoryImpl::delete,
             () -> {
                 throw new NotFoundException(AppStatusCode.NOT_FOUND_EXCEPTION);
@@ -125,10 +97,10 @@ public class FileService implements CrudService<FileCreateDto, FileInfoDto, Long
         entityManager.getTransaction().commit();
     }
 
-    public List<FileInfoDto> findAllByUserId(Long id) {
+    public List<FileInfoDto> findAllByUserId(Long userId) {
         entityManager.getTransaction().begin();
 
-        var files = fileRepositoryImpl.findAllByUserId(id).stream()
+        var files = fileRepositoryImpl.findAllByUserId(userId).stream()
             .map(fileInfoDtoMapper::mapFrom)
             .toList();
 

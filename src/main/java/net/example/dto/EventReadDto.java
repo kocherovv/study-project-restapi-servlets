@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 @Builder
 @Data
-public class EventReadDto {
+public class EventReadDto extends AbstractReadDto {
 
     private final Long id;
 

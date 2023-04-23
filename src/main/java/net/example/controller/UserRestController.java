@@ -6,11 +6,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import net.example.dto.UserCreateDto;
-import net.example.dto.UserReadDto;
+import net.example.domain.entity.User;
 import net.example.service.UserService;
 import net.example.util.AppContainer;
-import net.example.util.PasswordHasher;
 
 import java.io.IOException;
 import java.io.NotActiveException;
@@ -33,7 +31,7 @@ public class UserRestController extends HttpServlet {
         } else if (pathSegments.length == 4 && pathSegments[2].equals("users")) {
             try {
                 var userId = Long.valueOf(pathSegments[3]);
-                var user = userService.findById(userId).orElseThrow(NotActiveException::new);
+                var user = userService.findById(User.builder().id(userId).build()).orElseThrow(NotActiveException::new);
 
                 resp.getWriter().write(jsonMapper.writeValueAsString(user));
             } catch (Exception e) {
@@ -49,15 +47,8 @@ public class UserRestController extends HttpServlet {
         var pathSegments = pathInfo.split("/");
 
         if (pathSegments.length == 3 && pathSegments[2].equals("users")) {
-            var username = req.getParameter("username");
-            var email = req.getParameter("email");
-            byte[] password = PasswordHasher.hashPassword(req.getParameter("password").getBytes());
-
-            var userDto = userService.create(UserCreateDto.builder()
-                .name(username)
-                .email(email)
-                .password(password)
-                .build());
+            var reqBody = req.getInputStream().readAllBytes();
+            var userDto = userService.create(jsonMapper.readValue(reqBody, User.class));
 
             resp.getWriter().write(jsonMapper.writeValueAsString(userDto));
 
@@ -73,16 +64,8 @@ public class UserRestController extends HttpServlet {
         var pathSegments = pathInfo.split("/");
 
         if (pathSegments.length == 4 && pathSegments[2].equals("users")) {
-            var userId = Long.valueOf(pathSegments[3]);
-            var name = req.getParameter("userName");
-            var email = req.getParameter("email");
-
-            var user = userService.update(
-                UserReadDto.builder()
-                    .id(userId)
-                    .name(name)
-                    .email(email)
-                    .build());
+            var reqBody = req.getInputStream().readAllBytes();
+            var user = userService.update(jsonMapper.readValue(reqBody, User.class));
 
             resp.getWriter().write(jsonMapper.writeValueAsString(user));
 
@@ -100,9 +83,8 @@ public class UserRestController extends HttpServlet {
         if (pathSegments.length == 4 && pathSegments[2].equals("users")) {
             var userId = Long.valueOf(pathSegments[3]);
 
-            userService.deleteById(userId);
+            userService.deleteById(User.builder().id(userId).build());
             resp.sendError(HttpServletResponse.SC_NO_CONTENT);
-
         } else {
             resp.sendError(404);
         }

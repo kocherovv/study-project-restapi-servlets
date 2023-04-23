@@ -1,17 +1,19 @@
 package net.example.service;
 
+import net.example.dto.AbstractReadDto;
+
 import java.util.List;
 import java.util.Optional;
 
-public interface CrudService<CreateDTO, ReadDTO, ID> {
+public interface CrudService<E, T extends AbstractReadDto> {
 
-    List<ReadDTO> findAll();
+    List<T> findAll();
 
-    Optional<ReadDTO> findById(ID id);
+    Optional<T> findById(E id);
 
-    ReadDTO create(CreateDTO dto);
+    T create(E entity);
 
-    ReadDTO update(ReadDTO dto);
+    T update(E entity);
 
-    void deleteById(ID entity);
+    void deleteById(E id);
 }

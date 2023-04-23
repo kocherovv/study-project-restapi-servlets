@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import net.example.database.repository.impl.EventRepositoryImpl;
 import net.example.database.repository.impl.FileRepositoryImpl;
 import net.example.database.repository.impl.UserRepositoryImpl;
+import net.example.domain.entity.Event;
 import net.example.domain.enums.EventType;
 import net.example.dto.EventCreateDto;
 import net.example.dto.EventReadDto;
@@ -23,7 +24,7 @@ import java.util.Optional;
 
 @Transactional
 @RequiredArgsConstructor
-public class EventService implements CrudService<EventCreateDto, EventReadDto, Long> {
+public class EventService implements CrudService<Event, EventReadDto> {
 
     private final EntityManager entityManager;
 
@@ -45,17 +46,25 @@ public class EventService implements CrudService<EventCreateDto, EventReadDto, L
             .toList();
     }
 
-    public Optional<EventReadDto> findById(Long id) {
+    public Optional<EventReadDto> findById(Event event) {
         entityManager.getTransaction().begin();
 
-        return eventRepositoryImpl.findById(id)
+        var entity = eventRepositoryImpl.findById(event.getId())
             .map(eventReadMapper::mapFrom);
+
+        entityManager.getTransaction().commit();
+
+        return entity;
     }
 
-    public EventReadDto create(EventCreateDto eventCreateDto) {
+    public EventReadDto create(Event event) {
         entityManager.getTransaction().begin();
 
-        return eventReadMapper.mapFrom(eventRepositoryImpl.create(eventCreateMapper.mapFrom(eventCreateDto)));
+        var newEvent = eventReadMapper.mapFrom(eventRepositoryImpl.create(event));
+
+        entityManager.getTransaction().commit();
+
+        return newEvent;
     }
 
     public EventReadDto create(Long fileId, Long userId, EventType eventType) throws JsonProcessingException {
@@ -69,35 +78,50 @@ public class EventService implements CrudService<EventCreateDto, EventReadDto, L
                     .orElseThrow(NotFoundException::new))))
             .build();
 
-        return eventReadMapper.mapFrom(eventRepositoryImpl.create(eventCreateMapper.mapFrom(dto)));
+        var newEvent = eventReadMapper.mapFrom(eventRepositoryImpl.create(eventCreateMapper.mapFrom(dto)));
+
+        entityManager.getTransaction().commit();
+
+        return newEvent;
     }
 
-    public EventReadDto update(EventReadDto eventReadDto) {
+    public EventReadDto update(Event event) {
         entityManager.getTransaction().begin();
 
-        var event = eventRepositoryImpl.findById(eventReadDto.getId())
+        var Entity = eventRepositoryImpl.findById(event.getId())
             .orElseThrow(NotFoundException::new);
 
-        event.setEventType(eventReadDto.getEventType());
-        event.setUser(userRepositoryImpl.findById(eventReadDto.getUserId()).orElseThrow(NotFoundException::new));
+        Entity.setEventType(event.getEventType());
+        Entity.setUser(userRepositoryImpl.findById(event.getUser().getId())
+            .orElseThrow(NotFoundException::new));
 
-        return eventReadMapper.mapFrom(eventRepositoryImpl.update(event));
+        var updatedEvent = eventReadMapper.mapFrom(eventRepositoryImpl.update(event));
+
+        entityManager.getTransaction().commit();
+
+        return updatedEvent;
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(Event event) {
         entityManager.getTransaction().begin();
 
-        eventRepositoryImpl.findById(id).ifPresentOrElse(
+        eventRepositoryImpl.findById(event.getId()).ifPresentOrElse(
             eventRepositoryImpl::delete,
             () -> {
                 throw new NotFoundException(AppStatusCode.NOT_FOUND_EXCEPTION);
             });
+
+        entityManager.getTransaction().commit();
     }
 
-    public List<EventReadDto> findAllByUserId(Long userId) {
+    public List<EventReadDto> findAllByUserId(Event event) {
         entityManager.getTransaction().begin();
 
-        return eventRepositoryImpl.findAllByUserId(userId).stream()
+        var events = eventRepositoryImpl.findAllByUserId(event.getUser().getId()).stream()
             .map(eventReadMapper::mapFrom).toList();
+
+        entityManager.getTransaction().commit();
+
+        return events;
     }
 }

@@ -6,10 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import net.example.domain.enums.EventType;
-import net.example.dto.EventCreateDto;
-import net.example.dto.EventReadDto;
-import net.example.exception.NotFoundException;
+import net.example.domain.entity.Event;
 import net.example.service.EventService;
 import net.example.service.FileService;
 import net.example.util.AppContainer;
@@ -36,13 +33,22 @@ public class EventRestController extends HttpServlet {
             resp.getWriter().write(jsonMapper.writeValueAsString(allEvents));
 
         } else if (pathSegments.length == 3 && pathSegments[2].equals("events")) {
-            var allEvents = eventService.findAllByUserId(Long.valueOf(userId));
+            var allEvents = eventService.findAllByUserId(
+                Event.builder()
+                    .id(Long.valueOf(userId))
+                    .build());
+
             resp.getWriter().write(jsonMapper.writeValueAsString(allEvents));
 
         } else if (pathSegments.length == 4 && pathSegments[2].equals("events")) {
             try {
                 var eventId = Long.valueOf(pathSegments[3]);
-                var event = eventService.findById(eventId).orElseThrow(NotActiveException::new);
+                var event = eventService.findById(
+                    Event.builder()
+                        .id(eventId)
+                        .build())
+                    .orElseThrow(NotActiveException::new);
+
                 resp.getWriter().write(jsonMapper.writeValueAsString(event));
             } catch (Exception e) {
                 resp.sendError(HttpServletResponse.SC_NOT_FOUND);
@@ -57,17 +63,9 @@ public class EventRestController extends HttpServlet {
         var pathSegments = pathInfo.split("/");
 
         if (pathSegments.length == 3 && pathSegments[2].equals("events")) {
-            var userId = Long.valueOf(req.getParameter("userId"));
-            var fileId = Long.valueOf(req.getParameter("fileId"));
-            var eventType = EventType.valueOf(req.getParameter("eventType"));
+            var reqBody = req.getInputStream().readAllBytes();
 
-            var newEvent = eventService.create(EventCreateDto.builder()
-                .userId(userId)
-                .eventType(eventType)
-                .fileInfo(jsonMapper.writeValueAsString(
-                    fileService.findById(fileId)
-                        .orElseThrow(NotFoundException::new)))
-                .build());
+            var newEvent = eventService.create(jsonMapper.readValue(reqBody, Event.class));
 
             resp.getWriter().println(jsonMapper.writeValueAsString(newEvent));
         } else {
@@ -82,15 +80,9 @@ public class EventRestController extends HttpServlet {
         var pathSegments = pathInfo.split("/");
 
         if (pathSegments.length == 4 && pathSegments[2].equals("events")) {
-            var eventId = Long.valueOf(pathSegments[3]);
-            var userId = Long.valueOf(req.getParameter("userId"));
-            var eventType = EventType.valueOf(req.getParameter("eventType"));
+            var reqBody = req.getInputStream().readAllBytes();
 
-            var updatedEvent = eventService.update(EventReadDto.builder()
-                .id(eventId)
-                .userId(userId)
-                .eventType(eventType)
-                .build());
+            var updatedEvent = eventService.update(jsonMapper.readValue(reqBody, Event.class));
 
             resp.getWriter().println(jsonMapper.writeValueAsString(updatedEvent));
         } else {
@@ -107,8 +99,15 @@ public class EventRestController extends HttpServlet {
         if (pathSegments.length == 4 && pathSegments[2].equals("events")) {
             var eventId = Long.valueOf(pathSegments[3]);
 
-            eventService.deleteById(eventId);
-            resp.sendError(HttpServletResponse.SC_NO_CONTENT);
+            try {
+                eventService.deleteById(
+                    Event.builder()
+                        .id(eventId)
+                        .build());
+                resp.sendError(HttpServletResponse.SC_NO_CONTENT);
+            } catch (Exception e) {
+                resp.sendError(HttpServletResponse.SC_NOT_FOUND);
+            }
         }
     }
 }

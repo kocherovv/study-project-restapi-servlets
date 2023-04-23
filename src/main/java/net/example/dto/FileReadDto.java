@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 @Builder
 @Data
-public class FileReadDto {
+public class FileReadDto extends AbstractReadDto {
 
     private final Long id;
 
