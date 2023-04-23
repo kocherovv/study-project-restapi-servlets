@@ -6,8 +6,6 @@ import lombok.RequiredArgsConstructor;
 import net.example.database.repository.impl.FileRepositoryImpl;
 import net.example.database.repository.impl.UserRepositoryImpl;
 import net.example.domain.entity.File;
-import net.example.domain.enums.EventType;
-import net.example.dto.FileCreateDto;
 import net.example.dto.FileInfoDto;
 import net.example.dto.FileReadDto;
 import net.example.dto.mapper.FileCreateMapper;
@@ -15,7 +13,6 @@ import net.example.dto.mapper.FileInfoDtoMapper;
 import net.example.dto.mapper.FileReadMapper;
 import net.example.exception.NotFoundException;
 import net.example.model.AppStatusCode;
-import net.example.util.AppContainer;
 
 import java.util.List;
 import java.util.Optional;

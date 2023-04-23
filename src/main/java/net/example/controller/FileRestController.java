@@ -12,7 +12,6 @@ import net.example.domain.entity.Event;
 import net.example.domain.entity.File;
 import net.example.domain.entity.User;
 import net.example.domain.enums.EventType;
-import net.example.dto.FileCreateDto;
 import net.example.dto.FileReadDto;
 import net.example.exception.NotFoundException;
 import net.example.service.EventService;
@@ -75,7 +74,7 @@ public class FileRestController extends HttpServlet {
                         .user(User.builder().id(Long.valueOf(userId)).build())
                         .fileInfo(jsonMapper.writeValueAsString(downloadFile))
                         .eventType(EventType.DOWNLOAD)
-                    .build());
+                        .build());
 
                 writeFileOutputStream(resp, downloadFile);
             } catch (Exception e) {

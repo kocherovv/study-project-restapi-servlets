@@ -44,9 +44,9 @@ public class EventRestController extends HttpServlet {
             try {
                 var eventId = Long.valueOf(pathSegments[3]);
                 var event = eventService.findById(
-                    Event.builder()
-                        .id(eventId)
-                        .build())
+                        Event.builder()
+                            .id(eventId)
+                            .build())
                     .orElseThrow(NotActiveException::new);
 
                 resp.getWriter().write(jsonMapper.writeValueAsString(event));

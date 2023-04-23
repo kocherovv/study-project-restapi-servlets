@@ -15,7 +15,6 @@ import net.example.dto.EventReadDto;
 import net.example.dto.mapper.EventCreateMapper;
 import net.example.dto.mapper.EventReadMapper;
 import net.example.dto.mapper.FileInfoDtoMapper;
-import net.example.dto.mapper.FileReadMapper;
 import net.example.exception.NotFoundException;
 import net.example.model.AppStatusCode;
 
