@@ -35,7 +35,7 @@ public class UserRestController extends HttpServlet {
 
                 resp.getWriter().write(jsonMapper.writeValueAsString(user));
             } catch (Exception e) {
-                resp.sendError(404);
+                resp.sendError(HttpServletResponse.SC_NOT_FOUND);
             }
         }
     }
@@ -53,7 +53,7 @@ public class UserRestController extends HttpServlet {
             resp.getWriter().write(jsonMapper.writeValueAsString(userDto));
 
         } else {
-            resp.sendError(404);
+            resp.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
     }
 
@@ -70,7 +70,7 @@ public class UserRestController extends HttpServlet {
             resp.getWriter().write(jsonMapper.writeValueAsString(user));
 
         } else {
-            resp.sendError(404);
+            resp.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
     }
 
@@ -83,10 +83,11 @@ public class UserRestController extends HttpServlet {
         if (pathSegments.length == 4 && pathSegments[2].equals("users")) {
             var userId = Long.valueOf(pathSegments[3]);
 
-            userService.deleteById(User.builder().id(userId).build());
+            userService.delete(User.builder().id(userId).build());
             resp.sendError(HttpServletResponse.SC_NO_CONTENT);
+
         } else {
-            resp.sendError(404);
+            resp.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
     }
 }

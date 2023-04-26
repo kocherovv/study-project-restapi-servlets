@@ -1,5 +1,6 @@
 package net.example.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -16,7 +17,6 @@ import net.example.dto.FileReadDto;
 import net.example.exception.NotFoundException;
 import net.example.service.EventService;
 import net.example.service.FileService;
-import net.example.service.UserService;
 import net.example.util.AppContainer;
 
 import java.io.IOException;
@@ -27,7 +27,6 @@ import java.io.NotActiveException;
 public class FileRestController extends HttpServlet {
 
     private final FileService fileService = AppContainer.getInstance().getFileService();
-    private final UserService userService = AppContainer.getInstance().getUserService();
     private final EventService eventService = AppContainer.getInstance().getEventService();
     private final ObjectMapper jsonMapper = AppContainer.getInstance().getJsonMapper();
 
@@ -70,11 +69,7 @@ public class FileRestController extends HttpServlet {
                     "attachment; filename=" + downloadFile.getName() + "." + downloadFile.getExtension());
 
                 eventService.create(
-                    Event.builder()
-                        .user(User.builder().id(Long.valueOf(userId)).build())
-                        .fileInfo(jsonMapper.writeValueAsString(downloadFile))
-                        .eventType(EventType.DOWNLOAD)
-                        .build());
+                    buildEvent(Long.valueOf(userId), jsonMapper.writeValueAsString(downloadFile), EventType.DOWNLOAD));
 
                 writeFileOutputStream(resp, downloadFile);
             } catch (Exception e) {
@@ -104,15 +99,11 @@ public class FileRestController extends HttpServlet {
                 .build());
 
             eventService.create(
-                Event.builder()
-                    .user(User.builder().id(userId).build())
-                    .fileInfo(jsonMapper.writeValueAsString(createdFile))
-                    .eventType(EventType.UPLOAD)
-                    .build());
+                buildEvent(userId, jsonMapper.writeValueAsString(createdFile), EventType.UPLOAD));
 
             resp.getWriter().println(jsonMapper.writeValueAsString(createdFile));
         } else {
-            resp.sendError(404);
+            resp.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
     }
 
@@ -129,15 +120,11 @@ public class FileRestController extends HttpServlet {
             var updatedFile = fileService.update(jsonMapper.readValue(reqBody, File.class));
 
             eventService.create(
-                Event.builder()
-                    .user(User.builder().id(userId).build())
-                    .fileInfo(jsonMapper.writeValueAsString(updatedFile))
-                    .eventType(EventType.UPDATE)
-                    .build());
+                buildEvent(userId, jsonMapper.writeValueAsString(updatedFile), EventType.UPDATE));
 
             resp.getWriter().println(jsonMapper.writeValueAsString(updatedFile));
         } else {
-            resp.sendError(404);
+            resp.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
     }
 
@@ -152,19 +139,29 @@ public class FileRestController extends HttpServlet {
             var fileId = Long.valueOf(pathSegments[3]);
 
             eventService.create(
-                Event.builder()
-                    .user(User.builder().id(userId).build())
-                    .fileInfo(jsonMapper.writeValueAsString(
+                buildEvent(
+                    userId,
+                    jsonMapper.writeValueAsString(
                         fileService.findById(
-                            File.builder().id(fileId).build())))
-                    .eventType(EventType.DELETE)
-                    .build());
+                            File.builder()
+                                .id(fileId)
+                                .build())),
+                    EventType.DELETE));
 
-            fileService.deleteById(File.builder().id(fileId).build());
+            fileService.delete(File.builder().id(fileId).build());
+
             resp.sendError(HttpServletResponse.SC_NO_CONTENT);
         } else {
-            resp.sendError(400);
+            resp.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
+    }
+
+    private Event buildEvent(Long userId, String fileInfo, EventType download) throws JsonProcessingException {
+        return Event.builder()
+            .user(User.builder().id(userId).build())
+            .fileInfo(fileInfo)
+            .eventType(download)
+            .build();
     }
 
     @SneakyThrows

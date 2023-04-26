@@ -1,4 +1,4 @@
-package net.example.dto.mapper;
+package net.example.mapper;
 
 import net.example.domain.entity.File;
 import net.example.dto.FileInfoDto;

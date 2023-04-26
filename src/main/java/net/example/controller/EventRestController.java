@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import net.example.domain.entity.Event;
 import net.example.service.EventService;
-import net.example.service.FileService;
 import net.example.util.AppContainer;
 
 import java.io.IOException;
@@ -17,7 +16,6 @@ import java.io.NotActiveException;
 @WebServlet(urlPatterns = {"/events", "/events/*"})
 public class EventRestController extends HttpServlet {
 
-    private final FileService fileService = AppContainer.getInstance().getFileService();
     private final EventService eventService = AppContainer.getInstance().getEventService();
     private final ObjectMapper jsonMapper = AppContainer.getInstance().getJsonMapper();
 
@@ -69,7 +67,7 @@ public class EventRestController extends HttpServlet {
 
             resp.getWriter().println(jsonMapper.writeValueAsString(newEvent));
         } else {
-            resp.sendError(404);
+            resp.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
     }
 
@@ -86,7 +84,7 @@ public class EventRestController extends HttpServlet {
 
             resp.getWriter().println(jsonMapper.writeValueAsString(updatedEvent));
         } else {
-            resp.sendError(404);
+            resp.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
     }
 
@@ -100,7 +98,7 @@ public class EventRestController extends HttpServlet {
             var eventId = Long.valueOf(pathSegments[3]);
 
             try {
-                eventService.deleteById(
+                eventService.delete(
                     Event.builder()
                         .id(eventId)
                         .build());

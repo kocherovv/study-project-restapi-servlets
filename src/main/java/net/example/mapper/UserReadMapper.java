@@ -1,4 +1,4 @@
-package net.example.dto.mapper;
+package net.example.mapper;
 
 import lombok.RequiredArgsConstructor;
 import net.example.domain.entity.User;

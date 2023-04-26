@@ -6,7 +6,10 @@ import lombok.Getter;
 import net.example.database.repository.impl.EventRepositoryImpl;
 import net.example.database.repository.impl.FileRepositoryImpl;
 import net.example.database.repository.impl.UserRepositoryImpl;
-import net.example.dto.mapper.*;
+import net.example.mapper.EventReadMapper;
+import net.example.mapper.FileInfoDtoMapper;
+import net.example.mapper.FileReadMapper;
+import net.example.mapper.UserReadMapper;
 import net.example.service.EventService;
 import net.example.service.FileService;
 import net.example.service.UserService;
@@ -20,11 +23,8 @@ public class AppContainer {
     private final EventRepositoryImpl eventRepository;
     private final FileRepositoryImpl fileRepository;
 
-    private final UserCreateMapper userCreateMapper;
     private final UserReadMapper userReadMapper;
-    private final FileCreateMapper fileCreateMapper;
     private final FileReadMapper fileReadMapper;
-    private final EventCreateMapper eventCreateMapper;
     private final EventReadMapper eventReadMapper;
     private final FileInfoDtoMapper fileInfoDtoMapper;
 
@@ -43,10 +43,7 @@ public class AppContainer {
         eventRepository = new EventRepositoryImpl(session);
 
         eventReadMapper = new EventReadMapper();
-        eventCreateMapper = new EventCreateMapper(userRepository);
-        userCreateMapper = new UserCreateMapper();
         userReadMapper = new UserReadMapper(eventReadMapper);
-        fileCreateMapper = new FileCreateMapper(userRepository);
         fileReadMapper = new FileReadMapper();
         fileInfoDtoMapper = new FileInfoDtoMapper();
 
@@ -54,11 +51,11 @@ public class AppContainer {
         jsonMapper.findAndRegisterModules()
             .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
-        userService = new UserService(session, userRepository, userCreateMapper,
+        userService = new UserService(session, userRepository,
             userReadMapper);
-        fileService = new FileService(session, fileRepository, userRepository, fileCreateMapper,
+        fileService = new FileService(session, fileRepository, userRepository,
             fileReadMapper, fileInfoDtoMapper);
-        eventService = new EventService(session, eventRepository, userRepository, fileRepository, eventCreateMapper, eventReadMapper, fileInfoDtoMapper, jsonMapper);
+        eventService = new EventService(session, eventRepository, userRepository, eventReadMapper);
     }
 
     public static AppContainer getInstance() {

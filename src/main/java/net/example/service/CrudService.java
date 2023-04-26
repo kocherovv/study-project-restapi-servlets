@@ -9,11 +9,11 @@ public interface CrudService<E, T extends AbstractReadDto> {
 
     List<T> findAll();
 
-    Optional<T> findById(E id);
+    Optional<T> findById(E entity);
 
     T create(E entity);
 
     T update(E entity);
 
-    void deleteById(E id);
+    void delete(E entity);
 }

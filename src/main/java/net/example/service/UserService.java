@@ -6,9 +6,8 @@ import lombok.RequiredArgsConstructor;
 import net.example.database.repository.impl.UserRepositoryImpl;
 import net.example.domain.entity.User;
 import net.example.dto.UserReadDto;
-import net.example.dto.mapper.UserCreateMapper;
-import net.example.dto.mapper.UserReadMapper;
 import net.example.exception.NotFoundException;
+import net.example.mapper.UserReadMapper;
 import net.example.model.AppStatusCode;
 import net.example.util.PasswordHasher;
 
@@ -23,30 +22,29 @@ public class UserService implements CrudService<User, UserReadDto> {
 
     private final UserRepositoryImpl userRepositoryImpl;
 
-    private final UserCreateMapper userCreateMapper;
     private final UserReadMapper userReadMapper;
 
     public List<UserReadDto> findAll() {
         entityManager.getTransaction().begin();
 
-        var users = userRepositoryImpl.findAll().stream()
+        var usersDto = userRepositoryImpl.findAll().stream()
             .map(userReadMapper::mapFrom)
             .toList();
 
         entityManager.getTransaction().commit();
 
-        return users;
+        return usersDto;
     }
 
     public Optional<UserReadDto> findById(User user) {
         entityManager.getTransaction().begin();
 
-        var users = userRepositoryImpl.findById(user.getId())
+        var userDto = userRepositoryImpl.findById(user.getId())
             .map(userReadMapper::mapFrom);
 
         entityManager.getTransaction().commit();
 
-        return users;
+        return userDto;
     }
 
     public UserReadDto create(User user) {
@@ -54,11 +52,11 @@ public class UserService implements CrudService<User, UserReadDto> {
 
         user.setPassword(PasswordHasher.hashPassword(user.getPassword()));
 
-        var newUser = userReadMapper.mapFrom(userRepositoryImpl.create(user));
+        var userDto = userReadMapper.mapFrom(userRepositoryImpl.create(user));
 
         entityManager.getTransaction().commit();
 
-        return newUser;
+        return userDto;
     }
 
     public UserReadDto update(User user) throws NotFoundException {
@@ -70,14 +68,14 @@ public class UserService implements CrudService<User, UserReadDto> {
         entity.setName(user.getName());
         entity.setEmail(user.getEmail());
 
-        var updatedUser = userReadMapper.mapFrom(userRepositoryImpl.update(entity));
+        var userDto = userReadMapper.mapFrom(userRepositoryImpl.update(entity));
 
         entityManager.getTransaction().commit();
 
-        return updatedUser;
+        return userDto;
     }
 
-    public void deleteById(User user) throws NotFoundException {
+    public void delete(User user) throws NotFoundException {
         entityManager.getTransaction().begin();
 
         userRepositoryImpl.findById(user.getId()).ifPresentOrElse(
@@ -92,11 +90,11 @@ public class UserService implements CrudService<User, UserReadDto> {
     public Optional<UserReadDto> findByUserNameAndPassword(User user) {
         entityManager.getTransaction().begin();
 
-        var dto = userRepositoryImpl.findByUserNameAndPassword(user.getName(), user.getPassword())
+        var userDto = userRepositoryImpl.findByUserNameAndPassword(user.getName(), user.getPassword())
             .map(userReadMapper::mapFrom);
 
         entityManager.getTransaction().commit();
 
-        return dto;
+        return userDto;
     }
 }
