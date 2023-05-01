@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @Transactional
 @RequiredArgsConstructor
-public class EventService implements CrudService<Event, EventReadDto> {
+public class EventService {
 
     private final EntityManager entityManager;
 

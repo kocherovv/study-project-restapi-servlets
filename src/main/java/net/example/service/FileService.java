@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @Transactional
 @RequiredArgsConstructor
-public class FileService implements CrudService<File, FileInfoDto> {
+public class FileService {
 
     private final EntityManager entityManager;
 

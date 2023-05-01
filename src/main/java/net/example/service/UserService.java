@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @Transactional
 @RequiredArgsConstructor
-public class UserService implements CrudService<User, UserReadDto> {
+public class UserService {
 
     private final EntityManager entityManager;
 
@@ -85,16 +85,5 @@ public class UserService implements CrudService<User, UserReadDto> {
             });
 
         entityManager.getTransaction().commit();
-    }
-
-    public Optional<UserReadDto> findByUserNameAndPassword(User user) {
-        entityManager.getTransaction().begin();
-
-        var userDto = userRepositoryImpl.findByUserNameAndPassword(user.getName(), user.getPassword())
-            .map(userReadMapper::mapFrom);
-
-        entityManager.getTransaction().commit();
-
-        return userDto;
     }
 }
