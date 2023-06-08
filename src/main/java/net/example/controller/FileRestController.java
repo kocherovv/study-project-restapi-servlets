@@ -1,6 +1,5 @@
 package net.example.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -31,7 +30,7 @@ public class FileRestController extends HttpServlet {
     private final ObjectMapper jsonMapper = AppContainer.getInstance().getJsonMapper();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("application/json");
         var pathInfo = req.getRequestURI();
         var pathSegments = pathInfo.split("/");
@@ -48,7 +47,7 @@ public class FileRestController extends HttpServlet {
         } else if (pathSegments.length == 4 && pathSegments[2].equals("files")) {
             try {
                 var fileId = Long.valueOf(pathSegments[3]);
-
+                
                 var file = fileService.findById(File.builder().id(fileId).build())
                     .orElseThrow(NotActiveException::new);
 
@@ -56,6 +55,7 @@ public class FileRestController extends HttpServlet {
             } catch (Exception e) {
                 resp.sendError(HttpServletResponse.SC_NOT_FOUND);
             }
+
         } else if (pathSegments.length == 5 && pathSegments[2].equals("files") &&
             pathSegments[4].equals("download")) {
             try {
@@ -108,7 +108,7 @@ public class FileRestController extends HttpServlet {
     }
 
     @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("application/json");
         var pathInfo = req.getRequestURI();
         var pathSegments = pathInfo.split("/");
@@ -129,7 +129,7 @@ public class FileRestController extends HttpServlet {
     }
 
     @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("application/json");
         var pathInfo = req.getRequestURI();
         var pathSegments = pathInfo.split("/");
@@ -156,7 +156,7 @@ public class FileRestController extends HttpServlet {
         }
     }
 
-    private Event buildEvent(Long userId, String fileInfo, EventType download) throws JsonProcessingException {
+    private Event buildEvent(Long userId, String fileInfo, EventType download) {
         return Event.builder()
             .user(User.builder().id(userId).build())
             .fileInfo(fileInfo)
