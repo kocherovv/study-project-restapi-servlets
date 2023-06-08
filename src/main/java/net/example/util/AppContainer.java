@@ -43,7 +43,7 @@ public class AppContainer {
         eventRepository = new EventRepositoryImpl(session);
 
         eventReadMapper = new EventReadMapper();
-        userReadMapper = new UserReadMapper(eventReadMapper);
+        userReadMapper = new UserReadMapper();
         fileReadMapper = new FileReadMapper();
         fileInfoDtoMapper = new FileInfoDtoMapper();
 
